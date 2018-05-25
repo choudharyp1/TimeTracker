@@ -110,17 +110,18 @@ define('SENDER', '"Anuko Time Tracker" <no-reply@timetracker.anuko.com>');
 // See https://www.anuko.com/time_tracker/install_guide/mail.htm
 //
 define('MAIL_MODE', 'smtp');
-define('MAIL_SMTP_HOST', 'localhost'); // For gmail use 'ssl://smtp.gmail.com' instead of 'localhost' and port 465.
-// define('MAIL_SMTP_PORT', '465');
-// define('MAIL_SMTP_USER', 'yourname@yourdomain.com');
-// define('MAIL_SMTP_PASSWORD', 'yourpassword');
-// define('MAIL_SMTP_AUTH', true);
+define('MAIL_SMTP_HOST', 'ssl://secure.emailsrvr.com'); // For gmail use 'ssl://smtp.gmail.com' instead of 'localhost' and port 465.
+ define('MAIL_SMTP_PORT', '465');
+ define('MAIL_SMTP_USER', 'pratik.choudhary@alertdriving.com');
+ define('MAIL_SMTP_PASSWORD', 'Pokemon11');
+ define('MAIL_SMTP_AUTH', true);
 // define('MAIL_SMTP_DEBUG', true);
 
 
 // CSS files. They are located in the root of Time Tracker installation.
 //
 define('DEFAULT_CSS', 'default.css');
+define('BOOTSTRAP_CSS', 'bootstrap.min.css');
 define('RTL_CSS', 'rtl.css'); // For right to left languages.
 
 
@@ -203,7 +204,8 @@ define('AUTH_MODULE', 'db');
 
 // Team managers can set monthly work hour quota for years between the following  values.
 // define('MONTHLY_QUOTA_YEAR_START', 2010); // If nothing is specified, it falls back to 2015.
-// define('MONTHLY_QUOTA_YEAR_END', 2025);   // If nothing is specified, it falls back to 2030.
+// define('MONTHLY_QUOTA_YEAR_END', 2025);   // If nothing is specified, it falls back to 2030.tt
+
 
 // Height in pixels for the note input field in time.php. Defaults to 40.
 // define('NOTE_INPUT_HEIGHT', 100);

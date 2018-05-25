@@ -15,7 +15,6 @@
     <td colspan="2">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="2" align="center" height="50">{$forms.loginForm.btn_login.control}</td>
+    <td colspan="2" align="center" height="50" >{$forms.loginForm.btn_login.control}</td>
   </tr>
 </table>
-  

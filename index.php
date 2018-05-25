@@ -63,7 +63,7 @@ if ($mobileBrowser) {
 } else {
 ?>
 
-<html>
+<>
   <script src="js/strftime.js"></script>
   <script>
     location.href = "time.php?date="+(new Date()).strftime('<?php print DB_DATEFORMAT;?>');

@@ -47,48 +47,102 @@ import('ttReportHelper');
 $mdb2 = getConnection();
 $now = time();
 
- $sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition from tt_cron c
+$sql = "select c.id, c.cron_spec, c.report_id, c.email, c.cc, c.subject, c.report_condition, c.group_id from tt_cron c
    left join tt_fav_reports fr on (c.report_id = fr.id)
    where $now >= c.next and fr.status = 1
    and c.status = 1 and c.report_id is not null and c.email is not null";
 $res = $mdb2->query($sql);
 if (is_a($res, 'PEAR_Error'))
-  exit();
+    exit();
 
 while ($val = $res->fetchRow()) {
-  // We have jobs to execute in user language.
+    // We have jobs to execute in user language.
 
-  // Get favorite report details.
-  $report = ttFavReportHelper::getReport($val['report_id']);
-  if (!$report) continue; // Skip not found report.
+    // Get favorite report details.
+    $report = ttFavReportHelper::getReport($val['report_id']);
+    if (!$report) continue; // Skip not found report.
 
-  // Recycle global $user object, as user settings are specific for each report.
-  $user = new ttUser(null, $report['user_id']);
-  if (!$user->id) continue; // Skip not found user.
-  // Recycle $i18n object because language is user-specific.
-  $i18n->load($user->lang);
+    // Recycle global $user object, as user settings are specific for each report.
+    $user = new ttUser(null, $report['user_id']);
 
-  // Check condition on a report.
-  $condition_ok = true;
-  if ($val['report_condition'])
-    $condition_ok = ttReportHelper::checkFavReportCondition($report, $val['report_condition']);
 
-  // Email report if condition is okay.
-  if ($condition_ok) {
-    if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
-      echo "Report ".$val['report_id']. " sent.<br>";
-    else
-      echo "Error while emailing report...<br>";
-  }
+    //Get the group id for the favorite report.
+    $group_id = $val['group_id'];
+    //find all users in the db in the group and put them in an array.
+    $sql = "select u.id, u.name from tt_users u where u.group_id = $group_id";
+    $ures = $mdb2->query($sql);
+    if (is_a($ures, 'PEAR_Error')){
+        continue;
+    }
+    $usersId = array();
+    while($vval = $ures->fetchRow()){
+        array_push($usersId, $vval);
+    }
 
-  // Calculate next execution time.
-  $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".
-                                                                   // This is because the accuracy of tdcron class appears to be 1 minute.
+    $sql = "select l.date, l.user_id from tt_log l 
+            left join tt_users u on (l.user_id = u.id) 
+            where l.date < NOW() AND l.date > NOW() - INTERVAL 1 WEEK AND u.group_id = $group_id";
+    $tres = $mdb2->query($sql);
+    if (is_a ($tres, 'PEAR_Error')) continue;
 
-  // Update last and next values in tt_cron.
-  $sql = "update tt_cron set last = $now, next = $next where id = ".$val['id'];
-  $affected = $mdb2->exec($sql);
-  if (is_a($affected, 'PEAR_Error')) continue;
+    $logU = array();
+
+    while ($dval = $tres->fetchRow()){
+        array_push($logU, $dval['user_id']);
+    }
+    $logU = array_unique($logU);
+
+    $arrayFinal = array();
+
+    foreach($usersId as $userId){
+        if (!in_array($userId['id'], $logU)){
+            array_push($arrayFinal, $userId);
+        }
+    }
+
+    //Final users missing reports.
+    echo "Missing reports from: <br>";
+    foreach($arrayFinal as $log){
+        echo $log[id]. " ".$log['name'] ."<br>";
+    }
+
+
+    if (!$user->id) continue; // Skip not found user.
+    // Recycle $i18n object because language is user-specific.
+    $i18n->load($user->lang);
+
+    // Check condition on a report.
+    $condition_ok = true;
+    if ($val['report_condition'])
+        $condition_ok = ttReportHelper::checkFavReportCondition($report, $val['report_condition']);
+
+
+    // Email report if condition is okay.
+    if ($condition_ok) {
+        if (ttReportHelper::sendFavReport($report, $val['subject'], $val['email'], $val['cc']))
+            echo "Report ".$val['report_id']. " sent.<br>";
+        else
+            echo "Error while emailing report...<br>";
+
+
+
+        if (ttReportHelper::sendNoReport($group_id, $arrayFinal, $val[$subject], $val['email'], $val['cc'])){
+            echo "List of Missing Employee Reports ".$val['report_id']." sent.<br>";
+        }else{
+            echo "Error while emailing list...<br>";
+        }
+    }
+
+    // Calculate next execution time.
+    $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".
+    // This is because the accuracy of tdcron class appears to be 1 minute.
+
+    // Update last and next values in tt_cron.
+    $sql = "update tt_cron set last = $now, next = $next where id = ".$val['id'];
+    $affected = $mdb2->exec($sql);
+    if (is_a($affected, 'PEAR_Error')) continue;
 }
+
+
 
 echo "Done!";

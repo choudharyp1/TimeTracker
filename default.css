@@ -52,6 +52,7 @@ input, button, select, textarea {
   padding: 2px 5px 2px 5px;
 }
 
+
 input[type=checkbox], label {
   vertical-align: middle;
 }

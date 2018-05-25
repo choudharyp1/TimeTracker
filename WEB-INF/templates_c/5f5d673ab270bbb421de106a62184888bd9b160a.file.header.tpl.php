@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 16:43:26
+<?php /* Smarty version Smarty-3.0.7, created on 2018-05-24 16:33:56
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:249325b042c8ee5f4b6-42821584%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:268335b06cd5494de76-81005760%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '5f5d673ab270bbb421de106a62184888bd9b160a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\header.tpl',
-      1 => 1523047934,
+      1 => 1527172434,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '249325b042c8ee5f4b6-42821584',
+  'nocache_hash' => '268335b06cd5494de76-81005760',
   'function' => 
   array (
   ),
@@ -26,6 +26,8 @@ $_smarty_tpl->decodeProperties(array (
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="<?php echo @DEFAULT_CSS;?>
 " rel="stylesheet" type="text/css">
+  <link href="<?php echo @BOOTSTRAP_CSS;?>
+" rel="stylesheet" type="text/css">
 <?php if ($_smarty_tpl->getVariable('i18n')->value['language']['rtl']){?>
   <link href="<?php echo @RTL_CSS;?>
 " rel="stylesheet" type="text/css">
@@ -33,6 +35,8 @@ $_smarty_tpl->decodeProperties(array (
   <title>Time Tracker<?php if ($_smarty_tpl->getVariable('title')->value){?> - <?php echo $_smarty_tpl->getVariable('title')->value;?>
 <?php }?></title>
   <script src="js/strftime.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.min.js"></script>
   <script>
     <?php echo $_smarty_tpl->getVariable('js_date_locale')->value;?>
 

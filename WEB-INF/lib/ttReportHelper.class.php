@@ -1755,4 +1755,35 @@ class ttReportHelper {
 
     return true;
   }
+
+  static function prepareNoReportBody($group_id, $report){
+      $body = "This list of employees with missing reports from Group ".$group_id.": <br>";
+      foreach ($report as $user){
+          $body .= $user['id']. "     ".$user['name']."<br>";
+      }
+      return $body;
+  }
+
+  static function sendNoReport($group_id, $listNoReport, $subject, $email, $cc){
+      $body = ttReportHelper::prepareNoReportBody($group_id, $listNoReport);
+      global $user;
+      global $i18n;
+
+      import('mail.Mailer');
+      $mailer = new Mailer();
+      $mailer->setCharSet(CHARSET);
+      $mailer->setContentType('text/html');
+      $mailer->setSender(SENDER);
+      if (!empty($cc))
+          $mailer->setReceiverCC($cc);
+      if (!empty($user->bcc_email))
+          $mailer->setReceiverBCC($user->bcc_email);
+      $mailer->setReceiver($email);
+      $mailer->setMailMode(MAIL_MODE);
+      if (empty($subject)) $subject = "Missing reports from Group ". $group_id;
+      if (!$mailer->send($subject, $body))
+          return false;
+
+      return true;
+  }
 }

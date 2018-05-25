@@ -4,11 +4,14 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link href="{$smarty.const.DEFAULT_CSS}" rel="stylesheet" type="text/css">
+  <link href="{$smarty.const.BOOTSTRAP_CSS}" rel="stylesheet" type="text/css">
 {if $i18n.language.rtl}
   <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
 {/if}
   <title>Time Tracker{if $title} - {$title}{/if}</title>
   <script src="js/strftime.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.min.js"></script>
   <script>
     {* Setup locale for strftime *}
     {$js_date_locale}
