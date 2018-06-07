@@ -25,6 +25,8 @@
 // | Contributors:
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
+import("Auth");
+
 
 // ttRegistrator class is used to register a user in Time Tracker.
 class ttRegistrator {
@@ -38,7 +40,7 @@ class ttRegistrator {
   var $group_id = null;   // Group id, set after we create a group.
   var $role_id = null;    // Role id for top managers.
   var $user_id = null;    // User id after registration.
-  var $err = null;        // Error object, passed to us as reference.
+  var $err = null;        // Error object, passed to u qs as reference.
                           // We use it to communicate errors to caller.
 
   // Constructor.
@@ -58,8 +60,10 @@ class ttRegistrator {
     $this->validate();
   }
 
+
   function validate() {
     global $i18n;
+    global $auth;
 
     if (!ttValidString($this->group_name, true))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.group_name'));
@@ -69,12 +73,16 @@ class ttRegistrator {
       $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_name'));
     if (!ttValidString($this->login))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.manager_login'));
-    if (!ttValidString($this->password1))
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
-    if (!ttValidString($this->password2))
-      $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
-    if ($this->password1 !== $this->password2)
-      $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+      if (!$auth->isPasswordExternal()) {
+          if (!ttValidString($this->password1)){
+              $this->err->add($i18n->get('error.field'), $i18n->get('label.password'));
+          }
+          if (!ttValidString($this->password2))
+              $this->err->add($i18n->get('error.field'), $i18n->get('label.confirm_password'));
+          if ($this->password1 !== $this->password2)
+              $this->err->add($i18n->get('error.not_equal'), $i18n->get('label.password'), $i18n->get('label.confirm_password'));
+      }
+
     if (!ttValidEmail($this->email, true))
       $this->err->add($i18n->get('error.field'), $i18n->get('label.email'));
   }

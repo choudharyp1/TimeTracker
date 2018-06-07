@@ -170,20 +170,20 @@ define('REPORT_FOOTER', true);
 // Possible authentication methods:
 //   db - internal database, logins and password hashes are stored in time tracker database.
 //   ldap - authentication against an LDAP directory such as OpenLDAP or Windows Active Directory.
-define('AUTH_MODULE', 'db');
+//define('AUTH_MODULE', 'db');
 
 // LDAP authentication examples.
 // Go to https://www.anuko.com/time_tracker/install_guide/ldap_auth/index.htm for detailed configuration instructions.
 
 // Configuration example for OpenLDAP server:
-// define('AUTH_MODULE', 'ldap');
-// $GLOBALS['AUTH_MODULE_PARAMS'] = array(
-//  'server' => '127.0.0.1',                    // OpenLDAP server address or name. For secure LDAP use ldaps://hostname:port here.
-//  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
-                                                // It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
-//  'base_dn' => 'ou=People,dc=example,dc=com', // Base distinguished name in LDAP catalog.
-//  'default_domain' => 'example.com',          // Default domain.
-//  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
+ define('AUTH_MODULE', 'ldap');
+ $GLOBALS['AUTH_MODULE_PARAMS'] = array(
+  'server' => '192.168.6.67',                    // OpenLDAP server address or name. For secure LDAP use ldaps://hostname:port here.
+  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
+//                                                 It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
+  'base_dn' => 'ou=People,dc=alertdriving,dc=com', // Base distinguished name in LDAP catalog.
+  'default_domain' => 'alertdriving.com',          // Default domain.
+  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
 
 
 // Configuration example for Windows domains with Active Directory:
@@ -199,7 +199,7 @@ define('AUTH_MODULE', 'db');
                                         // array('Ldap Testers') means that the user must be a member Ldap Testers group.
                                         // array('Ldap Testers', 'Ldap Users') means the user must be a member of both Ldap Testers and Ldap Users groups.
 
-// define('AUTH_DEBUG', false); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
+ define('AUTH_DEBUG', 1); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
 
 // Team managers can set monthly work hour quota for years between the following  values.

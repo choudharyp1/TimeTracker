@@ -46,6 +46,10 @@ if ($request->isPost()) {
   if (!$auth->isPasswordExternal()) {
     $cl_password1 = $request->getParameter('password1');
     $cl_password2 = $request->getParameter('password2');
+  }else{
+      $cl_password1 = " ";
+      $cl_password2 = " ";
+
   }
   $cl_manager_email = trim($request->getParameter('manager_email'));
 } else

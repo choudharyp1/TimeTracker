@@ -41,7 +41,16 @@ class ttAdmin {
 
   // getSubgroups rerurns an array of subgroups for a group.
   function getSubgroups($group_id) {
-    return array(); // TODO: not yet implemented.
+    $mdb2 = getConnection();
+    $sql = "select id from tt_groups where parent_id = $group_id";
+    $res = $mdb2->query($sql);
+    $groups = array();
+    if (!is_a($res, 'PEAR_ERROR')){
+        while ($val = $res->fetchRow()){
+            $groups = $val;
+        }
+    }
+    return $groups;
   }
 
   // getUsers obtains user ids in a group.
