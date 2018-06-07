@@ -26,21 +26,28 @@
 // | https://www.anuko.com/time_tracker/credits.htm
 // +----------------------------------------------------------------------+
 
+//require_once('../../initialize.php');
+require_once(LIBRARY_DIR . '/tdcron/class.tdcron.php');
+require_once(LIBRARY_DIR . '/tdcron/class.tdcron.entry.php');
+require_once (LIBRARY_DIR. '/EmailSender.php');
+
 import('ttClientHelper');
 import('DateAndTime');
 import('Period');
 import('ttTimeHelper');
+import('ttFavReportHelper');
+import('ttReportHelper');
+
+
 
 
 require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
 
 require 'vendor/autoload.php';
-//
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 // Class ttReportHelper is used for help with reports.
 class ttReportHelper {
@@ -1767,12 +1774,129 @@ class ttReportHelper {
 
     //MY HELPER FUNCTIONS .................................................................................................
 
-    static function checkTypeOfReport($report, $condition){
-        $items = ttReportHelper::getFavItems($report);
+    static function getWeekRange(){
+        $previous_week = strtotime("-1 week +1 day");
+        $start_week = strtotime("last monday midnight", $previous_week);
+        $end_week = strtotime("next friday", $start_week);
+        $start_week = date("Y-m-d", $start_week);
+        $end_week = date("Y-m-d", $end_week);
+        $start_week = date('Y-m-d', strtotime(str_replace('-', '/', $start_week)));
+        $end_week = date('Y-m-d', strtotime(str_replace('-', '/', $end_week)));
 
+        return array($start_week, $end_week);
+    }
+
+    static function getProjectUsers($usersId, $pArray, $logU){
+        $projectsUsers = array();
+        foreach ($pArray as $project) {
+            $newArray = ttReportHelper::filterArrayByProjects($logU, $project['id']);
+            $numberOfHoursOnProjectbyUsers = array();
+            foreach ($usersId as $userid) {
+                $dur = ttReportHelper::numberOfHoursonProjectbyUser($newArray, $userid['id']);
+                array_push($numberOfHoursOnProjectbyUsers, $dur);
+            }
+            array_push($projectsUsers, $numberOfHoursOnProjectbyUsers);
+        }
+        return $projectsUsers;
+    }
+
+    static function getTotalTimebyUsers($usersId, $pArray, $projectsUsers){
+        $totalTimebyUsers = array();
+        for ($j = 0; $j < sizeof($usersId); $j++) {
+            $x = 0;
+            for ($i = 0; $i < sizeof($pArray); $i++) {
+                $x += $projectsUsers[$i][$j];
+            }
+            array_push($totalTimebyUsers, $x);
+        }
+        return $totalTimebyUsers;
+    }
+
+    static function getTotalTimeinProjects($usersId, $pArray, $projectsUsers){
+        $totalTimeinProject = array();
+        for ($i = 0; $i < sizeof($pArray); $i++) {
+            $x = 0;
+            for ($j = 0; $j < sizeof($usersId); $j++) {
+                $x += $projectsUsers[$i][$j];
+            }
+            array_push($totalTimeinProject, $x);
+        }
+        return $totalTimeinProject;
+    }
+
+    static function getDailyLoggingStatus($usersId, $groupedArray){
+        $loggedEveryday = array();
+        $dailyHours = array();
+
+        foreach ($usersId as $userid) {
+            $newArr = ttReportHelper::filterArrayByUsers($groupedArray, $userid['id']);
+            $vals = array(false, false, false, false, false);
+            $numbers = array(0, 0, 0, 0, 0);
+            foreach ($newArr as $n) {
+                $vals[date("w", strtotime($n['date'])) - 1] = true;
+                $str_time = $n['total_duration'];
+                $str_time = preg_replace("/^([\d]{1,2})\:([\d]{2})$/", "00:$1:$2", $str_time);
+                sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
+                $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
+                $numbers[date("w", strtotime($n['date'])) - 1] = $time_seconds / 3600;
+            }
+            array_push($loggedEveryday, $vals);
+            array_push($dailyHours, $numbers);
+        }
+
+        return array($loggedEveryday, $dailyHours);
+    }
+
+    static function getStatusReport($usersId, $dailyHours, $loggedEveryday, $totalTimebyUsers){
+        $statusReport = array();
+
+        for ($i = 0; $i < sizeof($usersId); $i++) {
+            if (ttReportHelper::checkFalseReport($dailyHours[$i])) {
+                $v = "Incorrect Report";
+                array_push($statusReport, $v);
+            } else if (!ttReportHelper::returnForFalse($loggedEveryday[$i])) {
+                $v = "Missing Days";
+                array_push($statusReport, $v);
+            } else if ($totalTimebyUsers[$i] < 40) {
+                $v = "Incomplete Hours";
+                array_push($statusReport, $v);
+            } else {
+                $v = "Completed";
+                array_push($statusReport, $v);
+            }
+        }
+        return $statusReport;
+    }
+
+    static function getUserDateandDuration($logU){
+        $userDateandDuration = array();
+        foreach ($logU as $log) {
+            $value = array(
+                'name' => $log['u_name'],
+                'date' => $log['date'],
+                'duration' => $log['total_duration'],
+                'project' => $log['name']
+            );
+
+            array_push($userDateandDuration, $value);
+        }
+        return $userDateandDuration;
+    }
+
+    static function getMissingReportUsers($usersId, $statusReport){
+        $arrayOfMissingReports = array();
+
+        for ($i = 0; $i < sizeof($statusReport); $i++){
+            if ($statusReport[$i] != "Completed"){
+                array_push($arrayOfMissingReports, $usersId[$i]['login']);
+            }
+        }
+        return $arrayOfMissingReports;
+    }
+
+    static function checkTypeOfReport($condition){
         $condition = str_replace('count', '', $condition);
         $count_required = (int) trim(str_replace('>', '', $condition));
-
         if ($count_required == 0){
             return true;
         }else {
@@ -1821,32 +1945,18 @@ class ttReportHelper {
         $duration = 0;
         foreach ($array as $i){
             if ($i['user_id'] == $userid){
-                $secs = strtotime($i['total_duration']) - strtotime("00:00:00");
-                $duration += $secs;
+                $str_time = $i['total_duration'];
+                $str_time = preg_replace("/^([\d]{1,2})\:([\d]{2})$/", "00:$1:$2", $str_time);
+                sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
+                $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
+                $duration += $time_seconds;
             }
         }
         $hrsDuration = $duration / 3600;
         return $hrsDuration;
     }
 
-    static function sendFile($filename, $email){
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->Host = 'ssl://secure.emailsrvr.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'pratik.choudhary@alertdriving.com';
-        $mail->Password = 'Pokemon11';
-        $mail->Port = 465;
-        $mail->From = $email;
-        $mail->FromName  = 'Alert Driving Time tracker';
-        $file_to_attach = $filename.'.xlsx';
-        $mail->Subject   = 'Weekly Report';
-        $mail->Body      = "Please download the excel report attached to this email." ."\n" . "Thanks.". "\n";
-        $mail->addAddress($email);
-        $mail->addAttachment( $file_to_attach , 'WeeklyReport.xlsx' );
 
-        return $mail->send();
-    }
 
     static function makeFile($filename, $numTimes ,$group_name, $usersId, $pArray, $projectUsers, $totalTimeByUsers, $totalTimeInProjects, $loggedEveryday, $dailyHours , $statusReport, $userDateAndDuration){
         $readers = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
@@ -2167,6 +2277,170 @@ class ttReportHelper {
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
         $writer->save($filename.'.xlsx');
+        return true;
+    }
+
+    static function groupReportGenerator($val){
+        $mdb2 = getConnection();
+        //Get the group id
+        $group_id = $val['group_id'];
+        $group_name = $val['group_name'];
+
+        //SQL Query on the Users table to get all users of the group
+        $sql = "select u.id, u.name, u.login from tt_users u where u.group_id = $group_id";
+        $ures = $mdb2->query($sql);
+        if (is_a($ures, 'PEAR_Error')) {
+            exit();
+        }
+        //usersId: contains the data of all users in the group.
+        $usersId = array();
+        while ($vval = $ures->fetchRow()) {
+            array_push($usersId, $vval);
+        }
+
+        list($start_week, $end_week) = ttReportHelper::getWeekRange();
+
+        //SQL query used to find all the logs within the previous week, sorted by user id and grouped by project id, date and user id.
+        $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, u.name as u_name, l.date ,l.project_id, p.name from tt_log l 
+            left join tt_users u on (l.user_id = u.id) 
+            left join tt_projects p on (l.project_id = p.id)
+            where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5
+            GROUP BY l.user_id, l.project_id, l.date
+            ORDER BY l.user_id, l.date";
+
+        $tres = $mdb2->query($sql);
+        if (is_a($tres, 'PEAR_Error')) exit();
+        //logU: contains all the logs from the group users within the timeline of previous week's monday to friday.
+        $logU = array();
+
+        while ($dval = $tres->fetchRow()) {
+            array_push($logU, $dval);
+        }
+
+        //SQL Query on the Projects table to get all the projects worked on by the group.
+        $sql = "select p.id, p.name from tt_projects p where group_id = $group_id";
+        $pres = $mdb2->query($sql);
+        if (is_a($pres, 'PEAR_Error')) exit();
+        //pArray: contains all the projects being worked on by the group.
+        $pArray = array();
+        while ($pval = $pres->fetchRow()) {
+            array_push($pArray, $pval);
+        }
+
+        //projectUsers: 2D array with the number of hours spent by each user on each project.
+        //totalTimebyUsers: 1D array of the total time spent on each User in the week.
+        //totalTimeinProjects: 1D array of the total time spent by the users on each project in the week.
+        $projectsUsers = ttReportHelper::getProjectUsers($usersId, $pArray, $logU);
+        $totalTimebyUsers = ttReportHelper::getTotalTimebyUsers($usersId, $pArray, $projectsUsers);
+        $totalTimeinProject = ttReportHelper::getTotalTimeinProjects($usersId, $pArray, $projectsUsers);
+
+        //SQL query used to find all the logs within the previous week, sorted by user id and date.
+        $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, l.date ,l.project_id, p.name from tt_log l 
+            left join tt_users u on (l.user_id = u.id) 
+            left join tt_projects p on (l.project_id = p.id)
+           where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5
+            GROUP BY l.user_id, l.date
+            ORDER BY l.user_id";
+
+        $fres = $mdb2->query($sql);
+        if (is_a($fres, 'PEAR_Error')) exit();
+
+        $groupedArray = array();
+        while ($fval = $fres->fetchRow()) {
+            array_push($groupedArray, $fval);
+        }
+
+        list ($loggedEveryday, $dailyHours) = ttReportHelper::getDailyLoggingStatus($usersId, $groupedArray);
+        $statusReport = ttReportHelper::getStatusReport($usersId, $dailyHours, $loggedEveryday, $totalTimebyUsers);
+
+        // usersId : array of users in the Group
+        // pArray: array of projects in the Group
+        // logU: array of logs by the users of the group
+        //projectsUsers: 2D array of Projects vs number of Users spend working by users.
+        //totalTimebyUsers: array with the project timings of all the users.
+        //totalTimeinProjects: array with the total time spent in each project.
+        //loggedEveryday: 2D array of all users for 5 days in a week with attendance per week.
+        //dailyHours: 2D array of the number of hours worked per days by each user
+        //statusReport: array with Completed, Missing Days and Incomplete Hours values parallel to the users array.
+        //userDateandDuration: associative array with the name, duration, date and project update of the user.
+
+        $userDateandDuration = ttReportHelper::getUserDateandDuration($logU);
+        $arrayOfMissingReports = ttReportHelper::getMissingReportUsers($usersId, $statusReport);
+
+
+        return array($usersId, $pArray, $logU, $projectsUsers, $totalTimebyUsers, $totalTimeinProject, $loggedEveryday,  $dailyHours, $statusReport, $userDateandDuration, $arrayOfMissingReports);
+    }
+
+    static function reportGenerator($res, $copyRes = false, $filename="Weekly-Report", $numTimes = 0){
+        global $i18n;
+        $mdb2 = getConnection();
+        $now = time();
+
+        while ($val = $res->fetchRow()) {
+            // We have jobs to execute in user language.
+            // Get favorite report details.
+            $report = ttFavReportHelper::getReport($val['report_id']);
+            if (!$report) continue; // Skip not found report.
+
+            // Recycle global $user object, as user settings are specific for each report.
+            $user = new ttUser(null, $report['user_id']);
+            if (!$user->id) continue; // Skip not found user.
+
+            //--------------------------------------------------------------------------------------------------------------------------------------------------------------
+            //New added code to the open source
+            //--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            list ($usersId, $pArray, $logU,
+                $projectsUsers, $totalTimebyUsers,
+                $totalTimeinProject, $loggedEveryday,
+                $dailyHours, $statusReport,
+                $userDateandDuration, $arrayOfMissingReports) = ttReportHelper::groupReportGenerator($val);
+
+            //Get the group id
+            $group_id = $val['group_id'];
+            $group_name = $val['group_name'];
+
+            // Recycle $i18n object because language is user-specific.
+            $i18n->load($user->lang);
+
+
+            // Email report if condition is okay.
+
+            if (ttReportHelper::checkTypeOfReport($val['report_condition'])) {
+                if (ttReportHelper::makeFile($filename, $numTimes, $group_name, $usersId, $pArray, $projectsUsers, $totalTimebyUsers, $totalTimeinProject, $loggedEveryday, $dailyHours, $statusReport, $userDateandDuration)) {
+                    $numTimes++;
+                    $copyRes = true;
+                    echo "Created Excel file <br>";
+                } else {
+                    echo "Error creating the excel file... <br>";
+                }
+            }else{
+                foreach($arrayOfMissingReports as $a){
+                    if (EmailSender::sendReminder($a)){
+                        echo "email sent successfully to " . $a . "<br>";
+                    }else{
+                        echo "email failed to send to ". $a. "<br>";
+                    }
+                }
+            }
+
+            // Calculate next execution time.
+            $next = tdCron::getNextOccurrence($val['cron_spec'], $now + 60); // +60 sec is here to get us correct $next when $now is close to existing "next".
+            // This is because the accuracy of tdcron class appears to be 1 minute.
+            // Update last and next values in tt_cron.
+            $sql = "update tt_cron set last = $now, next = $next where id = " . $val['id'];
+            $affected = $mdb2->exec($sql);
+            if (is_a($affected, 'PEAR_Error')) continue;
+        }
+
+
+        if ($copyRes) {
+            if (EmailSender::sendFile($filename, "pratik.choudhary@alertdriving.com")) {
+                echo "Excel file sent successsfully <br>";
+            } else {
+                echo "Error sending the excel file <br>";
+            }
+        }
         return true;
     }
 }
