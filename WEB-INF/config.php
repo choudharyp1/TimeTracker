@@ -112,8 +112,8 @@ define('SENDER', '"Anuko Time Tracker" <no-reply@timetracker.anuko.com>');
 define('MAIL_MODE', 'smtp');
 define('MAIL_SMTP_HOST', 'ssl://secure.emailsrvr.com'); // For gmail use 'ssl://smtp.gmail.com' instead of 'localhost' and port 465.
  define('MAIL_SMTP_PORT', '465');
- define('MAIL_SMTP_USER', 'pratik.choudhary@alertdriving.com');
- define('MAIL_SMTP_PASSWORD', 'Pokemon11');
+ define('MAIL_SMTP_USER', 'dev@alertdriving.com');
+ define('MAIL_SMTP_PASSWORD', 'Password$100');
  define('MAIL_SMTP_AUTH', true);
 // define('MAIL_SMTP_DEBUG', true);
 
