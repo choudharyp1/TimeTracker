@@ -89,12 +89,6 @@
                                 <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
                             </td>
                         </tr>
-                    <tr>
-                        <td height="17" bgcolor="" align="right"><a href="admin_groups.php"
-                                                                    class="">Logged in as: {$user->name|escape}
-                                - {$user->role_name|escape}{if $user->group}, {$user->group|escape}{/if}</a>
-                        </td>
-                    </tr>
                     </table>
                     <!-- end of sub menu for admin -->
                 {else}
@@ -167,12 +161,6 @@
                                 {/if}
                             </td>
                         </tr>
-                    <tr>
-                        <td height="17" bgcolor="" align="right"><a href="time.php"
-                                                                           class="">Logged in as: {$user->name|escape}
-                                - {$user->role_name|escape}{if $user->group}, {$user->group|escape}{/if}</a>
-                        </td>
-                    </tr>
                     </table>
                     <!-- end of sub menu for authorized user -->
                 {/if}
@@ -205,8 +193,8 @@
                     </tr>
                     {if $user->name}
                         <tr>
-                            <td>{$user->name|escape} - {$user->role_name|escape}{if $user->behalf_id > 0}
-                                    <b>{$i18n.label.on_behalf} {$user->behalf_name|escape}</b>{/if}{if $user->group}, {$user->group|escape}{/if}
+                            <td><b>{$user->name|escape} - {$user->role_name|escape}{if $user->behalf_id > 0}
+                                        <b>{$i18n.label.on_behalf} {$user->behalf_name|escape}</b>{/if}{if $user->group}, {$user->group|escape}{/if} </b>
                             </td>
                         </tr>
                     {else}
