@@ -176,24 +176,24 @@ define('REPORT_FOOTER', true);
 // Go to https://www.anuko.com/time_tracker/install_guide/ldap_auth/index.htm for detailed configuration instructions.
 
 // Configuration example for OpenLDAP server:
- define('AUTH_MODULE', 'ldap');
- $GLOBALS['AUTH_MODULE_PARAMS'] = array(
-  'server' => '192.168.6.67',                    // OpenLDAP server address or name. For secure LDAP use ldaps://hostname:port here.
-  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
-//                                                 It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
-  'base_dn' => 'ou=People,dc=alertdriving,dc=com', // Base distinguished name in LDAP catalog.
-  'default_domain' => 'alertdriving.com',          // Default domain.
-  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
+// define('AUTH_MODULE', 'ldap');
+// $GLOBALS['AUTH_MODULE_PARAMS'] = array(
+//  'server' => '192.168.6.67',                    // OpenLDAP server address or name. For secure LDAP use ldaps://hostname:port here.
+//  'type' => 'openldap',                       // Type of server. openldap type should also work with Sun Directory Server when member_of is empty.
+////                                                 It may work with other (non Windows AD) LDAP servers. For Windows AD use the 'ad' type.
+//  'base_dn' => 'ou=People,dc=alertdriving,dc=com', // Base distinguished name in LDAP catalog.
+//  'default_domain' => 'alertdriving.com',          // Default domain.
+//  'member_of' => array());                    // List of groups, membership in which is required for user to be authenticated.
 
 
 // Configuration example for Windows domains with Active Directory:
-// define('AUTH_MODULE', 'ldap');
-// $GLOBALS['AUTH_MODULE_PARAMS'] = array(
-//  'server' => '127.0.0.1',            // Domain controller IP address or name. For secure LDAP use ldaps://hostname:port here.
-//  'type' => 'ad',                     // Type of server.
-//  'base_dn' => 'DC=example,DC=com',   // Base distinguished name in LDAP catalog.
-//  'default_domain' => 'example.com',  // Default domain.
-//  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
+ define('AUTH_MODULE', 'ldap');
+ $GLOBALS['AUTH_MODULE_PARAMS'] = array(
+  'server' => '192.168.1.4',            // Domain controller IP address or name. For secure LDAP use ldaps://hostname:port here.
+  'type' => 'ad',                     // Type of server.
+  'base_dn' => 'DC=sonicad,DC=org',   // Base distinguished name in LDAP catalog.
+  'default_domain' => 'sonicad.org',  // Default domain.
+  'member_of' => array());            // List of groups, membership in which is required for user to be authenticated.
                                         // Leave it empty if membership is not necessary. Otherwise list CN parts only.
                                         // For example:
                                         // array('Ldap Testers') means that the user must be a member Ldap Testers group.

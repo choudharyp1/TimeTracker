@@ -1961,6 +1961,7 @@ class ttReportHelper {
     static function makeFile($filename, $numTimes ,$group_name, $usersId, $pArray, $projectUsers, $totalTimeByUsers, $totalTimeInProjects, $loggedEveryday, $dailyHours , $statusReport, $userDateAndDuration){
         $readers = new PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $spreadsheet = NULL;
+        $maxColumn = 'A';
         if ($numTimes > 0){
             $spreadsheet = $readers->load($filename.'.xlsx');
             $newSheet = new PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, $group_name);
@@ -2102,6 +2103,8 @@ class ttReportHelper {
             }
             $sheet->setCellValue($columnCounter.$rowCounter, $statusReport[$i]);
 
+
+            $maxColumn = $columnCounter;
 
             $rowCounter++;
             $columnCounter = $originalColumn;
@@ -2273,6 +2276,10 @@ class ttReportHelper {
         $subtotal = 0;
         $rowCounter++;
         $columnCounter = $originalColumn;
+
+        for ($col = $originalColumn; $col !== $maxColumn; $col++){
+            $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
+        }
 
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);

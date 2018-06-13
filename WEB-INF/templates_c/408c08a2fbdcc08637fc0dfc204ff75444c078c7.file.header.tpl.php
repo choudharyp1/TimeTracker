@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-06-11 12:55:18
+<?php /* Smarty version Smarty-3.0.7, created on 2018-06-13 08:59:09
          compiled from "/var/www/html/anuko/WEB-INF/templates/header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:3770915255b1ea976d26785-75564328%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16989404985b21151d7eeaf1-23227236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '408c08a2fbdcc08637fc0dfc204ff75444c078c7' => 
     array (
       0 => '/var/www/html/anuko/WEB-INF/templates/header.tpl',
-      1 => 1528736112,
+      1 => 1528894735,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3770915255b1ea976d26785-75564328',
+  'nocache_hash' => '16989404985b21151d7eeaf1-23227236',
   'function' => 
   array (
   ),
@@ -72,7 +72,7 @@ $_smarty_tpl->decodeProperties(array (
                       <td height="55" align="center"><img alt="Time Tracker" width="300" height="43" src="<?php echo $_smarty_tpl->getVariable('custom_logo')->value;?>
 " border="0"></a></td>
 <?php }else{ ?>
-                      <td height="55" align="center"><a href="https://www.anuko.com/lp/tt_1.htm" target="_blank"><img alt="Anuko Time Tracker" width="300" height="43" src="images/alertDriving_logo.png" border="0"></a></td>
+                      <td height="55" align="center"><a href="http://confluence.alert.local/" target="_blank"><img alt="Anuko Time Tracker" width="50%" src="images/alertDriving_logo.png" border="0"></a></td>
 <?php }?>
                     </tr>
                   </table>

@@ -1310,11 +1310,11 @@ class PHPMailer
      *
      * @return bool false on error - See the ErrorInfo property for details of the error
      */
+
     public function send()
     {
         try {
             if (!$this->preSend()) {
-                echo "problem is here";
                 return false;
             }
             return $this->postSend();

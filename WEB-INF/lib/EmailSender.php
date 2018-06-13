@@ -20,11 +20,11 @@ class EmailSender
         $mail->isSMTP();
         $mail->Host = 'ssl://secure.emailsrvr.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'pratik.choudhary@alertdriving.com';
-        $mail->Password = 'Pokemon11';
+        $mail->Username = 'dev@alertdriving.com';
+        $mail->Password = 'Password$100';
         $mail->Port = 465;
-        $mail->From = $email;
-        $mail->FromName  = 'Alert Driving Time tracker';
+        $mail->From = 'dev@alertdriving.com';
+        $mail->FromName  = 'AlertDriving Time tracker';
         $file_to_attach = $filename.'.xlsx';
         $mail->Subject   = 'Weekly Report';
         $mail->Body      = "Please download the excel report attached to this email." ."\n" . "Thanks.". "\n";
