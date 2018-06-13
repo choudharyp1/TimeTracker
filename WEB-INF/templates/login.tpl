@@ -16,6 +16,6 @@ function get_date() {
   </tr>
 </table>
 
-{if !empty($about_text)}
-  <div id="LoginAboutText"> {$about_text} </div>
-{/if}
+{*{if !empty($about_text)}*}
+  {*<div id="LoginAboutText"> {$about_text} </div>*}
+{*{/if}*}
