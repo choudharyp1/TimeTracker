@@ -2383,7 +2383,10 @@ class ttReportHelper {
         $mdb2 = getConnection();
         $now = time();
 
+        $email = "";
         while ($val = $res->fetchRow()) {
+
+            $email = $val['email'];
             // We have jobs to execute in user language.
             // Get favorite report details.
             $report = ttFavReportHelper::getReport($val['report_id']);
@@ -2442,7 +2445,7 @@ class ttReportHelper {
 
 
         if ($copyRes) {
-            if (EmailSender::sendFile($filename, "pratik.choudhary@alertdriving.com")) {
+            if (EmailSender::sendFile($filename, $email)) {
                 echo "Excel file sent successsfully <br>";
             } else {
                 echo "Error sending the excel file <br>";
