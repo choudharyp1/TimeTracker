@@ -2311,7 +2311,7 @@ class ttReportHelper {
         $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, u.name as u_name, l.date ,l.project_id, p.name from tt_log l 
             left join tt_users u on (l.user_id = u.id) 
             left join tt_projects p on (l.project_id = p.id)
-            where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5
+            where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1
             GROUP BY l.user_id, l.project_id, l.date
             ORDER BY l.user_id, l.date";
 
@@ -2345,7 +2345,7 @@ class ttReportHelper {
         $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, l.date ,l.project_id, p.name from tt_log l 
             left join tt_users u on (l.user_id = u.id) 
             left join tt_projects p on (l.project_id = p.id)
-           where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5
+           where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1
             GROUP BY l.user_id, l.date
             ORDER BY l.user_id";
 

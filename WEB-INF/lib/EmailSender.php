@@ -30,7 +30,6 @@ class EmailSender
         $mail->Body      = "Please download the excel report attached to this email." ."\n" . "Thanks.". "\n";
         $mail->addAddress($email);
         $mail->addAttachment( $file_to_attach , 'WeeklyReport.xlsx' );
-
         return $mail->send();
     }
 
