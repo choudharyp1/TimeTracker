@@ -1875,7 +1875,8 @@ class ttReportHelper {
                 'name' => $log['u_name'],
                 'date' => $log['date'],
                 'duration' => $log['total_duration'],
-                'project' => $log['name']
+                'project' => $log['name'],
+                'task'  => $log['task_name']
             );
 
             array_push($userDateandDuration, $value);
@@ -2157,14 +2158,23 @@ class ttReportHelper {
         $sheet->setCellValue($columnCounter.$rowCounter, 'User');
         $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
         $columnCounter++;
-        $sheet->setCellValue($columnCounter.$rowCounter, 'Date');
+        $sheet->setCellValue($columnCounter.$rowCounter, 'Project');
         $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
         $columnCounter++;
+
+        $sheet->setCellValue($columnCounter.$rowCounter, 'Task');
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
+        $columnCounter++;
+
         $sheet->setCellValue($columnCounter.$rowCounter, 'Duration');
         $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
         $columnCounter++;
-        $sheet->setCellValue($columnCounter.$rowCounter, 'Project');
+
+        $sheet->setCellValue($columnCounter.$rowCounter, 'Date');
         $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
+
+
+
 
         $columnCounter = $originalColumn;
         $rowCounter++;
@@ -2195,6 +2205,8 @@ class ttReportHelper {
                     $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
                     $columnCounter++;
                     $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
+                    $columnCounter++;
+                    $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
                     $sheet->setCellValue($columnCounter.$rowCounter,$subtotal);
                     $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
                     $columnCounter++;
@@ -2210,14 +2222,21 @@ class ttReportHelper {
                 $sheet->setCellValue($columnCounter.$rowCounter, $u['name']);
             }
             $columnCounter++;
-
+            if ($tmpName != $u['name']){
+                $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray2);
+            }
+            $sheet->setCellValue($columnCounter.$rowCounter, $u['project']);
+            $columnCounter++;
 
             if ($tmpName != $u['name']){
                 $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray2);
             }
-            $sheet->setCellValue($columnCounter.$rowCounter, date("M-d-Y", strtotime($u['date'])));
+            if ($u['task'] != null){
+                $sheet->setCellValue($columnCounter.$rowCounter, $u['task']);
+            }else{
+                $sheet->setCellValue($columnCounter.$rowCounter, "-");
+            }
             $columnCounter++;
-
 
             if ($tmpName != $u['name']){
                 $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray2);
@@ -2231,14 +2250,10 @@ class ttReportHelper {
             $subtotal += $time_seconds/3600;
             $columnCounter++;
 
-
-
             if ($tmpName != $u['name']){
                 $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray2);
             }
-            $sheet->setCellValue($columnCounter.$rowCounter, $u['project']);
-            $columnCounter++;
-
+            $sheet->setCellValue($columnCounter.$rowCounter, date("M-d-Y", strtotime($u['date'])));
             $rowCounter++;
             $columnCounter = $originalColumn;
 
@@ -2265,11 +2280,14 @@ class ttReportHelper {
         $columnCounter++;
 
         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
+        $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
+        $columnCounter++;
+
+        $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
         $sheet->setCellValue($columnCounter.$rowCounter,$subtotal);
         $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
         $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
         $columnCounter++;
-
 
         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
         $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
@@ -2308,11 +2326,12 @@ class ttReportHelper {
         list($start_week, $end_week) = ttReportHelper::getWeekRange();
 
         //SQL query used to find all the logs within the previous week, sorted by user id and grouped by project id, date and user id.
-        $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, u.name as u_name, l.date ,l.project_id, p.name from tt_log l 
+        $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, u.name as u_name, l.date ,l.project_id, l.task_id, p.name, t.name AS task_name from tt_log l 
             left join tt_users u on (l.user_id = u.id) 
             left join tt_projects p on (l.project_id = p.id)
+            left join tt_tasks t on (l.task_id = t.id) 
             where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1
-            GROUP BY l.user_id, l.project_id, l.date
+            GROUP BY l.user_id, l.project_id, l.date, l.task_id
             ORDER BY l.user_id, l.date";
 
         $tres = $mdb2->query($sql);

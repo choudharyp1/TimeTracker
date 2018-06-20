@@ -1,0 +1,65 @@
+/*Custom file*/
+
+
+td .dayview-table-notes {
+    white-space:pre;
+    white-space:pre-wrap; word-wrap:break-word;
+}
+
+td .weekview-table-notes {
+    white-space:pre;
+    white-space:pre-wrap; word-wrap:break-word;
+}
+
+table #dayview-table {
+    width: 50%;
+}
+
+table #weekview-table {
+    width: 50%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+table #weekview-form-table{
+    width: 50%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.weekview-table-fill-notes {
+    height: 3em;
+    width: 7em;
+    transition: all 0.1s ease;
+}
+
+.weekview-table-fill-notes:focus{
+    height: 20em;
+    width: 30em;
+}
+
+.weekview-table-fill-duration{
+    height: 2em;
+    width: 5em;
+    background: #F8F8F8;
+    box-shadow: none;
+    resize: none;
+}
+
+.weekview-table-fill-duration:focus{
+    background: lightcyan;
+}
+
+/*align week view table first column right and others left.*/
+#weekview-form-table td,
+#weekview-form-table th
+{
+    text-align:right;
+}
+
+#right,
+#weekview-form-table td + td,
+#weekview-form-table th + th
+{
+    text-align:left;
+}

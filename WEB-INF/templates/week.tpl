@@ -81,7 +81,7 @@ function fillDropdowns() {
     </td>
   </tr>
 </table>
-<table width="720">
+<table id="weekview-form-table" width="100%">
   <tr valign="top">
     <td>{$forms.weekTimeForm.week_durations.control}</td>
   </tr>
@@ -95,7 +95,7 @@ function fillDropdowns() {
 </table>
 
 {if $user->isPluginEnabled('wvl')}
-<table width="720">
+<table id="weekview-table">
 <tr>
   <td valign="top">
 {if $time_records}
@@ -136,7 +136,7 @@ function fillDropdowns() {
         <td nowrap align="right" valign="top">{if $record.finish}{$record.finish}{else}&nbsp;{/if}</td>
     {/if}
         <td align="right" valign="top">{if ($record.duration == '0:00' && $record.start <> '')}<font color="#ff0000">{$i18n.form.time.uncompleted}</font>{else}{$record.duration}{/if}</td>
-        <td valign="top">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
+        <td valign="top" class="weekview-table-notes">{if $record.comment}{$record.comment|escape}{else}&nbsp;{/if}</td>
         <td valign="top" align="center">
     {if $record.invoice_id}
           &nbsp;

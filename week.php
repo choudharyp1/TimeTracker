@@ -147,7 +147,7 @@ class LabelCellRenderer extends DefaultCellRenderer {
 
     // Special handling for a new week entry (row 0, or 0 and 1 if we show notes).
     if (0 == $row) {
-      $this->setOptions(array('style'=>'text-align: center; font-weight: bold; vertical-align: top;'));
+      $this->setOptions(array('style'=>'text-align: right; font-weight: bold; vertical-align: top;'));
     } else if ($user->isPluginEnabled('wvns') && (1 == $row)) {
       $this->setOptions(array('style'=>'text-align: right; vertical-align: top;'));
     } else if ($user->isPluginEnabled('wvns') && (0 != $row % 2)) {
@@ -175,28 +175,28 @@ class WeekViewCellRenderer extends DefaultCellRenderer {
     global $user;
 
     $field_name = $table->getValueAt($row,$column)['control_id']; // Our text field names (and ids) are like x_y (row_column).
-    $field = new TextField($field_name);
+    $field = new TextArea($field_name);
     // Disable control if the date is locked.
     global $lockedDays;
     if ($lockedDays[$column-1])
       $field->setEnabled(false);
     $field->setFormName($table->getFormName());
-    $field->setStyle('width: 60px;'); // TODO: need to style everything properly, eventually.
+//    $field->setStyle('width: 150px;'); // TODO: need to style everything properly, eventually.
     // Provide visual separation for new entry row.
     $rowToSeparate = $user->isPluginEnabled('wvns') ? 1 : 0;
     if ($rowToSeparate == $row) {
-      $field->setStyle('width: 60px; margin-bottom: 40px');
+      $field->setStyle('margin-bottom: 40px');
     }
     if ($user->isPluginEnabled('wvns')) {
       if (0 == $row % 2) {
         $field->setValue($table->getValueAt($row,$column)['duration']); // Duration for even rows.
       } else {
         $field->setValue($table->getValueAt($row,$column)['note']);     // Comment for odd rows.
-        $field->setTitle($table->getValueAt($row,$column)['note']);     // Tooltip to help view the entire comment.
+//        $field->setTitle($table->getValueAt($row,$column)['note']);     // Tooltip to help view the entire comment.
       }
     } else {
       $field->setValue($table->getValueAt($row,$column)['duration']);
-      // $field->setTitle($table->getValueAt($row,$column)['note']); // Tooltip to see comment. TODO - value not available.
+//       $field->setTitle($table->getValueAt($row,$column)['note']); // Tooltip to see comment. TODO - value not available.
     }
     // Disable control when time entry mode is TYPE_START_FINISH and there is no value in control
     // because we can't supply start and finish times in week view - there are no fields for them.

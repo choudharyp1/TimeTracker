@@ -8,10 +8,13 @@
     {if $i18n.language.rtl}
         <link href="{$smarty.const.RTL_CSS}" rel="stylesheet" type="text/css">
     {/if}
+    <link href="{$smarty.const.AD_CSS}" rel="stylesheet" type="text/css">
     <title>Time Tracker{if $title} - {$title}{/if}</title>
     <script src="js/strftime.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script src="js/ad.js"></script>
+
     <script>
         {* Setup locale for strftime *}
         {$js_date_locale}
