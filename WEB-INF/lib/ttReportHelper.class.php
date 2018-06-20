@@ -2344,7 +2344,11 @@ class ttReportHelper {
         }
 
         //SQL Query on the Projects table to get all the projects worked on by the group.
-        $sql = "select p.id, p.name from tt_projects p where group_id = $group_id";
+        $sql = "select distinct project_id as id, p.name
+                from tt_log l
+                left join tt_projects p on (p.id = project_id)
+                where l.date <= '$end_week' AND l.date >= '$start_week' AND p.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1;";
+
         $pres = $mdb2->query($sql);
         if (is_a($pres, 'PEAR_Error')) exit();
         //pArray: contains all the projects being worked on by the group.
