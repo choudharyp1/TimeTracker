@@ -123,6 +123,7 @@ define('MAIL_SMTP_HOST', 'ssl://secure.emailsrvr.com'); // For gmail use 'ssl://
 define('DEFAULT_CSS', 'default.css');
 define('BOOTSTRAP_CSS', 'bootstrap.min.css');
 define('RTL_CSS', 'rtl.css'); // For right to left languages.
+define('AD_CSS', 'ad.css');
 
 
 // Default date format. Behaviour with not included formats is undefined. Possible values:
@@ -199,7 +200,7 @@ define('REPORT_FOOTER', true);
                                         // array('Ldap Testers') means that the user must be a member Ldap Testers group.
                                         // array('Ldap Testers', 'Ldap Users') means the user must be a member of both Ldap Testers and Ldap Users groups.
 
- define('AUTH_DEBUG', 1); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
+// define('AUTH_DEBUG', 1); // Note: enabling AUTH_DEBUG breaks redirects as debug output is printed before setting redirect header. Do not enable on production systems.
 
 
 // Team managers can set monthly work hour quota for years between the following  values.
