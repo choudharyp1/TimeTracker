@@ -91,7 +91,7 @@
     {if $bean->getAttribute('chstart')}<td nowrap class="cellRightAligned">{$item.start}</td>{/if}
     {if $bean->getAttribute('chfinish')}<td nowrap class="cellRightAligned">{$item.finish}</td>{/if}
     {if $bean->getAttribute('chduration')}<td class="cellRightAligned">{$item.duration}</td>{/if}
-    {if $bean->getAttribute('chnote')}<td class="cellLeftAligned">{$item.note|escape}</td>{/if}
+    {if $bean->getAttribute('chnote')}<td class="cellLeftAligned report-table-notes">{$item.note|escape}</td>{/if}
     {if $bean->getAttribute('chcost')}<td class="cellRightAligned">{if $user->can('manage_invoices') || $user->isClient()}{$item.cost}{else}{$item.expense}{/if}</td>{/if}
     {if $bean->getAttribute('chpaid')}<td class="cellRightAligned">{if $item.paid == 1}{$i18n.label.yes}{else}{$i18n.label.no}{/if}{/if}
     {if $bean->getAttribute('chip')}<td class="cellRightAligned">{if $item.modified}{$item.modified_ip} {$item.modified}{else}{$item.created_ip} {$item.created}{/if}{/if}

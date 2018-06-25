@@ -11,6 +11,11 @@ td .weekview-table-notes {
     white-space:pre-wrap; word-wrap:break-word;
 }
 
+td .report-table-notes{
+    white-space:pre;
+    white-space:pre-wrap; word-wrap:break-word;
+}
+
 table #dayview-table {
     width: 50%;
 }
