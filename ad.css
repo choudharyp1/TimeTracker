@@ -30,6 +30,7 @@ table #weekview-form-table{
 .weekview-table-fill-notes {
     height: 3em;
     width: 7em;
+    margin-bottom: 20px;
     transition: all 0.1s ease;
 }
 
@@ -41,6 +42,7 @@ table #weekview-form-table{
 .weekview-table-fill-duration{
     height: 2em;
     width: 5em;
+    margin-bottom: 5px;
     background: #F8F8F8;
     box-shadow: none;
     resize: none;
@@ -63,3 +65,12 @@ table #weekview-form-table{
 {
     text-align:left;
 }
+
+.borderless td, .borderless tr {
+    border: none;
+}
+
+.systemMenu a {
+    margin: 5pt;
+}
+

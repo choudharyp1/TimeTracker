@@ -1,6 +1,6 @@
 {$forms.timeRecordForm.open}
 <table cellspacing="4" cellpadding="7" border="0" width="720">
-<tr>
+<tr class="table borderless">
   <td>
   <table border='0' cellpadding='3' cellspacing='1' width="100%">
   <tr>

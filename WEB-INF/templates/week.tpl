@@ -28,7 +28,7 @@ function fillDropdowns() {
       <a href="time.php?date={$selected_date->toString()}">{$i18n.label.day_view}</a>&nbsp;/&nbsp;<a href="week.php?date={$selected_date->toString()}">{$i18n.label.week_view}</a>
     </td>
   </tr>
-  <tr>
+  <tr class="table borderless">
     <td valign="top">
       <table>
 {if $on_behalf_control}
@@ -88,7 +88,7 @@ function fillDropdowns() {
 </table>
 
 <table>
-  <tr>
+  <tr class="table borderless">
     <td align="center" colspan="2">{$forms.weekTimeForm.btn_submit.control}</td>
   </tr>
   <tr><td>&nbsp;</td></tr>

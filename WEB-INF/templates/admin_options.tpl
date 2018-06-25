@@ -2,7 +2,7 @@
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      <table cellspacing="1" cellpadding="2" border="0">
+      <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right" nowrap>{$i18n.label.person_name} (*):</td>
           <td>{$forms.optionsForm.name.control}</td>

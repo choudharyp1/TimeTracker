@@ -3,7 +3,7 @@
 </script>
 
 {$forms.reportForm.open}
-<table width="720">
+<table class="table borderless" width="720">
   <td valign="top">
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>

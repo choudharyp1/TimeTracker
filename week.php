@@ -152,6 +152,8 @@ class LabelCellRenderer extends DefaultCellRenderer {
       $this->setOptions(array('style'=>'text-align: right; vertical-align: top;'));
     } else if ($user->isPluginEnabled('wvns') && (0 != $row % 2)) {
       $this->setOptions(array('style'=>'text-align: right;'));
+    } else if ($user->isPluginEnabled('wvns') && (0 == $row % 2)) {
+        $this->setOptions(array('style'=>'text-align: right; font-weight: bold;'));
     }
     // Special handling for not billable entries.
     $ignoreRow = $user->isPluginEnabled('wvns') ? 1 : 0; 

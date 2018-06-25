@@ -1,4 +1,4 @@
-<table border="0">
+<table class="table borderless" border="0">
   {if $show_hint}
   <tr>
     <td colspan="2" align="center">{$i18n.label.ldap_hint}</td>

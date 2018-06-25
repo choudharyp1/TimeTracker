@@ -3,7 +3,7 @@
 </script>
 
 <table cellspacing="0" cellpadding="7" border="0" width="720">
-  <tr>
+  <tr class="table borderless">
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   {if $inactive_roles}

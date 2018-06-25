@@ -7,7 +7,7 @@
 </style>
 
 {$forms.timeRecordForm.open}
-<table cellspacing="4" cellpadding="0" border="0">
+<table style="" cellspacing="4" cellpadding="0" border="0">
 {if $user->isPluginEnabled('wv')}
   <tr>
     <td align="center" colspan=2">
@@ -15,8 +15,8 @@
     </td>
   </tr>
 {/if}
-  <tr>
-    <td valign="top">
+  <tr class="table borderless" >
+    <td valign="top" align="right">
       <table>
 {if $on_behalf_control}
         <tr>
@@ -71,7 +71,7 @@
 {/if}
       </table>
     </td>
-    <td valign="top">
+    <td valign="top" align="left">
       <table>
         <tr><td>{$forms.timeRecordForm.date.control}</td></tr>
       </table>
@@ -80,11 +80,11 @@
 </table>
 
 <table>
-  <tr>
-    <td align="right">{$i18n.label.note}:</td>
+  <tr class="table borderless">
+    <td align="right"><b>{$i18n.label.note}:  </b></td>
     <td align="left">{$forms.timeRecordForm.note.control}</td>
   </tr>
-  <tr>
+  <tr class="table borderless">
     <td align="center" colspan="2">{$forms.timeRecordForm.btn_submit.control}</td>
   </tr>
 </table>

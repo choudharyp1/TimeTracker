@@ -3,7 +3,7 @@
   <tr>
     <td valign="top">
 {if $user->can('manage_advanced_settings')}
-      <table cellspacing="1" cellpadding="3" border="0" width="100%">
+      <table class="table borderless" cellspacing="1" cellpadding="3" border="0" width="100%">
         <tr>
           <td class="tableHeader">{$i18n.label.thing_name}</td>
           <td class="tableHeader">{$i18n.label.schedule}</td>

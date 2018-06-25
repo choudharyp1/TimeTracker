@@ -163,7 +163,7 @@ function handleCheckboxes() {
   </table>
 </div>
 
-<table cellspacing="4" cellpadding="7" border="0">
+<table class="table borderless" cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">

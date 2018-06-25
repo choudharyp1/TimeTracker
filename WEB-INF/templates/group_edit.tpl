@@ -103,7 +103,7 @@ function handlePluginCheckboxes() {
 <table cellspacing="4" cellpadding="7" border="0">
     <tr>
       <td>
-        <table cellspacing="1" cellpadding="2" border="0">
+        <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
 {if $user->can('manage_basic_settings')}
           <tr>
             <td align="right" nowrap>{$i18n.label.group_name}:</td>
@@ -196,9 +196,8 @@ function handlePluginCheckboxes() {
           </tr>
 
           <tr>
-             <td colspan="2" class="sectionHeader">{$i18n.form.group_edit.plugins}</td>
+             <td  colspan="2" class="sectionHeader">{$i18n.form.group_edit.plugins}</td>
           </tr>
-          <tr><td>&nbsp;</td></tr>
           <tr>
             <td align="right" nowrap>{$forms.groupForm.charts.control}</td>
             <td><label for="charts">{$i18n.title.charts}</label></td>

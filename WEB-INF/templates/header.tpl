@@ -11,9 +11,10 @@
     <link href="{$smarty.const.AD_CSS}" rel="stylesheet" type="text/css">
     <title>Time Tracker{if $title} - {$title}{/if}</title>
     <script src="js/strftime.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/ad.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
 
     <script>
         {* Setup locale for strftime *}
@@ -73,11 +74,11 @@
                     <table cellspacing="0" cellpadding="3" width="100%" border="0">
                         <tr>
                             <td class="systemMenu" height="17" align="center">&nbsp;
-                                <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
+                                <a class="systemMenu" href="logout.php">{$i18n.menu.logout}     <span class="glyphicon glyphicon-log-out"></span> </a> &middot;
                                 <a class="systemMenu" href="{$smarty.const.FORUM_LINK}"
-                                   target="_blank">{$i18n.menu.forum}</a> &middot;
+                                   target="_blank">{$i18n.menu.forum}  <span class="glyphicon glyphicon-question-sign"></span></a> &middot;
                                 <a class="systemMenu" href="{$smarty.const.HELP_LINK}"
-                                   target="_blank">{$i18n.menu.help}</a>
+                                   target="_blank">{$i18n.menu.help}  <span class="glyphicon glyphicon-info-sign"></span></a>
                             </td>
                         </tr>
                     </table>
@@ -88,8 +89,8 @@
                         <tr>
                             <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">
                                 &nbsp;
-                                <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}</a> &middot;
-                                <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}</a>
+                                <a class="mainMenu" href="admin_groups.php">{$i18n.menu.groups}  <span class="glyphicon glyphicon-th-list"></span></a> &middot;
+                                <a class="mainMenu" href="admin_options.php">{$i18n.menu.options}  <span class="glyphicon glyphicon-cog"></span></a>
                             </td>
                         </tr>
                     </table>
@@ -99,19 +100,19 @@
                     <table cellspacing="0" cellpadding="3" width="100%" border="0">
                         <tr>
                             <td class="systemMenu" height="17" align="center">&nbsp;
-                                <a class="systemMenu" href="logout.php">{$i18n.menu.logout}</a> &middot;
+                                <a class="systemMenu" href="logout.php">{$i18n.menu.logout}  <span class="glyphicon glyphicon-log-out"></span></a> &middot;
                                 {if $user->can('manage_own_settings')}
-                                    <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}</a>
+                                    <a class="systemMenu" href="profile_edit.php">{$i18n.menu.profile}  <span class="glyphicon glyphicon-pencil"></span></a>
                                     &middot;
                                 {/if}
                                 {if $user->can('manage_basic_settings')}
-                                    <a class="systemMenu" href="group_edit.php">{$i18n.menu.group}</a>
+                                    <a class="systemMenu" href="group_edit.php">{$i18n.menu.group} <span class="glyphicon glyphicon-th-list"></span></a>
                                     &middot;
                                 {/if}
                                 <a class="systemMenu" href="{$smarty.const.FORUM_LINK}"
-                                   target="_blank">{$i18n.menu.forum}</a> &middot;
+                                   target="_blank">{$i18n.menu.forum}  <span class="glyphicon glyphicon-question-sign"></span></a> &middot;
                                 <a class="systemMenu" href="{$smarty.const.HELP_LINK}"
-                                   target="_blank">{$i18n.menu.help}</a>
+                                   target="_blank">{$i18n.menu.help}  <span class="glyphicon glyphicon-info-sign"></span></a>
                             </td>
                         </tr>
                     </table>
@@ -123,7 +124,7 @@
                             <td align="center" bgcolor="#d9d9d9" nowrap height="17" background="images/subm_bg.gif">
                                 &nbsp;
                                 {if $user->can('track_own_time') || $user->can('track_time')}
-                                    <a class="mainMenu" href="time.php">{$i18n.menu.time}</a>
+                                    <a class="mainMenu" href="time.php">{$i18n.menu.time}  <span class="glyphicon glyphicon-time"></span></a>
                                 {/if}
                                 {if $user->isPluginEnabled('ex') && ($user->can('track_own_expenses') || $user->can('track_expenses'))}
                                     &middot;
@@ -131,7 +132,7 @@
                                 {/if}
                                 {if $user->can('view_own_reports') || $user->can('view_reports')}
                                     &middot;
-                                    <a class="mainMenu" href="reports.php">{$i18n.menu.reports}</a>
+                                    <a class="mainMenu" href="reports.php">{$i18n.menu.reports}  <span class="glyphicon glyphicon-file"></span></a>
                                 {/if}
                                 {if $user->isPluginEnabled('iv') && ($user->can('view_own_invoices') || $user->can('manage_invoices'))}
                                     &middot;
@@ -144,15 +145,15 @@
                                 {/if}
                                 {if ($user->can('view_own_projects') || $user->can('manage_projects')) && ($smarty.const.MODE_PROJECTS == $user->tracking_mode || $smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode)}
                                     &middot;
-                                    <a class="mainMenu" href="projects.php">{$i18n.menu.projects}</a>
+                                    <a class="mainMenu" href="projects.php">{$i18n.menu.projects}  <span class="glyphicon glyphicon-stats"></span></a>
                                 {/if}
                                 {if ($smarty.const.MODE_PROJECTS_AND_TASKS == $user->tracking_mode && ($user->can('view_own_tasks') || $user->can('manage_tasks')))}
                                     &middot;
-                                    <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}</a>
+                                    <a class="mainMenu" href="tasks.php">{$i18n.menu.tasks}  <span class="glyphicon glyphicon-tasks"></span></a>
                                 {/if}
                                 {if $user->can('view_users') || $user->can('manage_users')}
                                     &middot;
-                                    <a class="mainMenu" href="users.php">{$i18n.menu.users}</a>
+                                    <a class="mainMenu" href="users.php">{$i18n.menu.users}  <span class="glyphicon glyphicon-user"></span></a>
                                 {/if}
                                 {if $user->isPluginEnabled('cl') && ($user->can('view_own_clients') || $user->can('manage_clients'))}
                                     &middot;
@@ -160,7 +161,7 @@
                                 {/if}
                                 {if $user->can('export_data')}
                                     &middot;
-                                    <a class="mainMenu" href="export.php">{$i18n.menu.export}</a>
+                                    <a class="mainMenu" href="export.php">{$i18n.menu.export}  <span class="glyphicon glyphicon-export"></span></a>
                                 {/if}
                             </td>
                         </tr>
@@ -172,14 +173,14 @@
                 <table cellspacing="0" cellpadding="3" width="100%" border="0">
                     <tr>
                         <td class="systemMenu" height="17" align="center">&nbsp;
-                            <a class="systemMenu" href="login.php">{$i18n.menu.login}</a> &middot;
+                            <a class="systemMenu" href="login.php">{$i18n.menu.login} <span class="glyphicon glyphicon-log-in"></span></a> &middot;
                             {if isTrue($smarty.const.MULTITEAM_MODE) && $smarty.const.AUTH_MODULE == 'db'}
                                 <a class="systemMenu" href="register.php">{$i18n.menu.create_group}</a>
                                 &middot;
                             {/if}
                             <a class="systemMenu" href="{$smarty.const.FORUM_LINK}"
-                               target="_blank">{$i18n.menu.forum}</a> &middot;
-                            <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}</a>
+                               target="_blank">{$i18n.menu.forum}  <span class="glyphicon glyphicon-question-sign"></span></a> &middot;
+                            <a class="systemMenu" href="{$smarty.const.HELP_LINK}" target="_blank">{$i18n.menu.help}  <span class="glyphicon glyphicon-info-sign"></span></a>
                         </td>
                     </tr>
                 </table>

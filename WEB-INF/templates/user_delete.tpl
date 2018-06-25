@@ -1,6 +1,6 @@
 {$forms.userDeleteForm.open}
 <table cellspacing="4" cellpadding="7" border="0">
-  <tr>
+  <tr class="table borderless">
     <td>
       <table cellspacing="0" cellpadding="0" border="0">
         <tr>

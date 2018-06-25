@@ -6,8 +6,8 @@
   <tr><td valign="top">{$i18n.form.groups.hint}</td></tr>
 </table>
 
-<table cellspacing="1" cellpadding="3" border="0" width="720">
-  <tr>
+<table  cellspacing="1" cellpadding="3" border="0" width="720">
+  <tr class="table borderless">
     <td width="3%" class="tableHeader">{$i18n.label.id}</td>
     <td width="70%" class="tableHeader">{$i18n.label.thing_name}</td>
     <td class="tableHeader">{$i18n.label.date}</td>
