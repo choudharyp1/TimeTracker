@@ -81,7 +81,7 @@ define('WEEKEND_START_DAY', 6);
 //
 // Lifetime in seconds for tt_PHPSESSID cookie. Time to live is extended by this value
 // with each visit to the site so that users don't have to re-login. 
-// define('PHPSESSID_TTL', 86400);
+ define('PHPSESSID_TTL', 86400);
 //
 // Note: see also PHP_SESSION_PATH below as you may have to use it together with
 // PHPSESSID_TTL to avoid premature session expirations.
@@ -90,7 +90,7 @@ define('WEEKEND_START_DAY', 6);
 // PHP_SESSION_PATH
 // Local file system path for PHP sessions. Use it to isolate session deletions
 // (garbage collection interference) by other PHP scripts potentially running on the system.
-// define('PHP_SESSION_PATH', '/tmp/timetracker'); // Directory must exist and be writable.
+ define('PHP_SESSION_PATH', '/tmp/timetracker'); // Directory must exist and be writable.
 
 
 // Forum and help links from the main menu.

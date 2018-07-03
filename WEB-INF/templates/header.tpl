@@ -37,7 +37,7 @@
                     {if $user->custom_logo}
                     <td align="center">
                         {else}
-                    <td bgcolor="#a6ccf7" background="images/top_bg.gif" align="center">
+                    <td bgcolor="#ffffff" background="" align="center">
                         {/if}
                         <table cellspacing="0" cellpadding="0" width="{$tab_width}" border="0">
                             <tr>
@@ -54,7 +54,7 @@
                                                                                     border="0"></a></td>
                                             {else}
                                                 <td height="55" align="center"><a href="http://confluence.alert.local/"
-                                                                                  target="_blank"><img
+                                                                                  target="_blank"><img style="margin-bottom: 10px;"
                                                                 alt="Anuko Time Tracker" width="50%"
                                                                 src="images/alertDriving_logo.png" border="0"></a></td>
                                             {/if}
