@@ -2020,13 +2020,16 @@ class ttReportHelper {
         $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FFFFFF');
         $columnCounter++;
 
-        for ($i = 0; $i < sizeof($pArray); $i++){
-            $sheet->setCellValue($columnCounter.$rowCounter, $pArray[$i]['name']);
-            $spreadsheet->getActiveSheet()->getColumnDimension($columnCounter)->setWidth(15);
-            $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('000000');
-            $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FFFFFF');
-            $columnCounter++;
-        }
+        //CODE TO SHOW PROJECTS IN THE WEEKLY REPORT:
+
+//        for ($i = 0; $i < sizeof($pArray); $i++){
+//            $sheet->setCellValue($columnCounter.$rowCounter, $pArray[$i]['name']);
+//            $spreadsheet->getActiveSheet()->getColumnDimension($columnCounter)->setWidth(15);
+//            $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('000000');
+//            $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FFFFFF');
+//            $columnCounter++;
+//        }
+
         $sheet->setCellValue($columnCounter.$rowCounter, 'Total Hours by User');
         $spreadsheet->getActiveSheet()->getColumnDimension($columnCounter)->setWidth(20);
         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('000000');
@@ -2075,11 +2078,17 @@ class ttReportHelper {
         for($i = 0; $i < sizeof($usersId); $i++){
             $sheet->setCellValue($columnCounter.$rowCounter, $usersId[$i]['name']);
             $columnCounter++;
-            for ($j = 0; $j < sizeof($pArray); $j++){
-                $sheet->setCellValue($columnCounter.$rowCounter, $projectUsers[$j][$i]);
-                $columnCounter++;
-            }
+
+            //CODE TO SHOW PROJECTS IN THE WEEKLY REPORT:
+//            for ($j = 0; $j < sizeof($pArray); $j++){
+//                $sheet->setCellValue($columnCounter.$rowCounter, $projectUsers[$j][$i]);
+//                $columnCounter++;
+//            }
+
+
+
             $sheet->setCellValue($columnCounter.$rowCounter, $totalTimeByUsers[$i]);
+            $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
             $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
             $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FF4500');
             $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray);
@@ -2088,15 +2097,18 @@ class ttReportHelper {
             for ($j = 0; $j < sizeof($loggedEveryday[$i]); $j++){
                 if ($loggedEveryday[$i][$j]){
                     $sheet->setCellValue($columnCounter.$rowCounter, $dailyHours[$i][$j]);
+                    $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
                     if ($dailyHours[$i][$j] < 24 && $dailyHours[$i][$j] > 0){
                         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('7CFC00');
                     }else{
                         $sheet->setCellValue($columnCounter.$rowCounter, $dailyHours[$i][$j]);
+                        $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
                         $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FFFFFF');
                         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('006400');
                     }
                 }else{
                     $sheet->setCellValue($columnCounter.$rowCounter, $dailyHours[$i][$j]);
+                    $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
                     $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
                 }
                 $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray);
@@ -2117,15 +2129,19 @@ class ttReportHelper {
         $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray);
         $columnCounter++;
         $totalSum = 0;
+
+        //CODE TO SHOW PROJECTS IN THE WEEKLY REPORT:
+
         for ($i = 0; $i < sizeof($pArray); $i++){
-            $sheet->setCellValue($columnCounter.$rowCounter, $totalTimeInProjects[$i]);
+//            $sheet->setCellValue($columnCounter.$rowCounter, $totalTimeInProjects[$i]);
             $totalSum += $totalTimeInProjects[$i];
-            $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
-            $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FF4500');
-            $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray);
-            $columnCounter++;
+//            $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
+//            $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FF4500');
+//            $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray);
+//            $columnCounter++;
         }
         $sheet->setCellValue($columnCounter.$rowCounter, $totalSum);
+        $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
         $sheet->getStyle($columnCounter.$rowCounter)->getFont()->getColor()->setRGB('FF4500');
         $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray);
@@ -2208,6 +2224,7 @@ class ttReportHelper {
                     $columnCounter++;
                     $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
                     $sheet->setCellValue($columnCounter.$rowCounter,$subtotal);
+                    $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
                     $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
                     $columnCounter++;
                     $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
@@ -2246,7 +2263,7 @@ class ttReportHelper {
             sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
             $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
             $sheet->setCellValue($columnCounter.$rowCounter, $time_seconds/3600);
-
+            $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
             $subtotal += $time_seconds/3600;
             $columnCounter++;
 
@@ -2285,6 +2302,7 @@ class ttReportHelper {
 
         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
         $sheet->setCellValue($columnCounter.$rowCounter,$subtotal);
+        $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
         $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
         $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
         $columnCounter++;
@@ -2292,8 +2310,50 @@ class ttReportHelper {
         $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
         $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
         $subtotal = 0;
+        $rowCounter += 2;
+        $columnCounter = $originalColumn;
+
+        $tmpcolumn = $columnCounter;
+        $tmpcolumn++;
+        $sheet->mergeCells($columnCounter.$rowCounter.':'.$tmpcolumn.$rowCounter);
+        $sheet->setCellValue($columnCounter.$rowCounter, 'Total Project Hours Report');
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setSize(14);
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
         $rowCounter++;
         $columnCounter = $originalColumn;
+
+        $sheet->setCellValue($columnCounter.$rowCounter, 'Project');
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
+        $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
+        $columnCounter++;
+        $sheet->setCellValue($columnCounter.$rowCounter, 'Total Hours');
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
+        $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
+        $columnCounter = $originalColumn;
+        $rowCounter++;
+
+        for ($i = 0; $i < sizeof($pArray); $i++){
+            $sheet->setCellValue($columnCounter.$rowCounter, $pArray[$i]['name']);
+            $columnCounter++;
+            $sheet->setCellValue($columnCounter.$rowCounter, $totalTimeInProjects[$i]);
+            $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
+            $columnCounter = $originalColumn;
+            $rowCounter++;
+        }
+
+        $sheet->setCellValue($columnCounter.$rowCounter,"Total Hours in Projects");
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
+        $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
+        $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
+        $columnCounter++;
+
+        $sheet->getStyle($columnCounter.$rowCounter)->getFill()->setFillType(PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setRGB('DCDCDC');
+        $sheet->setCellValue($columnCounter.$rowCounter,$totalSum);
+        $sheet->getStyle($columnCounter.$rowCounter)->getNumberFormat()->setFormatCode('0.00');
+        $spreadsheet->getActiveSheet()->getStyle($columnCounter.$rowCounter)->getFont()->setBold(true);
+        $sheet->getStyle($columnCounter.$rowCounter)->applyFromArray($styleArray3);
+        $columnCounter++;
+
 
         for ($col = $originalColumn; $col !== $maxColumn; $col++){
             $spreadsheet->getActiveSheet()->getColumnDimension($col)->setAutoSize(true);
