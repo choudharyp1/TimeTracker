@@ -1857,7 +1857,7 @@ class ttReportHelper {
             } else if (!ttReportHelper::returnForFalse($loggedEveryday[$i])) {
                 $v = "Missing Days";
                 array_push($statusReport, $v);
-            } else if ($totalTimebyUsers[$i] < 40) {
+            } else if ($totalTimebyUsers[$i] < 37.5) {
                 $v = "Incomplete Hours";
                 array_push($statusReport, $v);
             } else {
