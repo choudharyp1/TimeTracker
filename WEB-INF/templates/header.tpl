@@ -108,6 +108,7 @@
                                 {if $user->can('manage_basic_settings')}
                                     <a class="systemMenu" href="group_edit.php">{$i18n.menu.group} <span class="glyphicon glyphicon-th-list"></span></a>
                                     &middot;
+                                    <a class="systemMenu" href="weeklyreport.php">Week-Report <span class="glyphicon glyphicon-calendar"></span></a> &middot;
                                 {/if}
                                 <a class="systemMenu" href="{$smarty.const.FORUM_LINK}"
                                    target="_blank">{$i18n.menu.forum}  <span class="glyphicon glyphicon-question-sign"></span></a> &middot;
