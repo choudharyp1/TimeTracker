@@ -1964,7 +1964,7 @@ class ttReportHelper {
         $spreadsheet = NULL;
         $maxColumn = 'A';
         if ($numTimes > 0){
-            $spreadsheet = $readers->load($filename.'.xlsx');
+            $spreadsheet = $readers->load("/tmp/timetracker/" . $filename.'.xlsx');
             $newSheet = new PhpOffice\PhpSpreadsheet\Worksheet\Worksheet($spreadsheet, $group_name);
             $spreadsheet->addSheet($newSheet);
         }else{
@@ -2361,7 +2361,7 @@ class ttReportHelper {
 
 
         $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-        $writer->save($filename.'.xlsx');
+        $writer->save("/tmp/timetracker/" . $filename.'.xlsx');
         return true;
     }
 
