@@ -1889,7 +1889,7 @@ class ttReportHelper {
 
         for ($i = 0; $i < sizeof($statusReport); $i++){
             if ($statusReport[$i] != "Completed"){
-                array_push($arrayOfMissingReports, $usersId[$i]['login']);
+                array_push($arrayOfMissingReports, $usersId[$i]['email']);
             }
         }
         return $arrayOfMissingReports;
@@ -2372,7 +2372,7 @@ class ttReportHelper {
         $group_name = $val['group_name'];
 
         //SQL Query on the Users table to get all users of the group
-        $sql = "select u.id, u.name, u.login from tt_users u where u.group_id = $group_id";
+        $sql = "select u.id, u.name, u.login, u.email from tt_users u where u.group_id = $group_id";
         $ures = $mdb2->query($sql);
         if (is_a($ures, 'PEAR_Error')) {
             exit();
