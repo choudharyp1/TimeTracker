@@ -25,7 +25,7 @@ class EmailSender
         $mail->Port = 465;
         $mail->From = 'dev@alertdriving.com';
         $mail->FromName  = 'AlertDriving Time tracker';
-        $file_to_attach = $filename.'.xlsx';
+        $file_to_attach = "/tmp/timetracker/" .$filename.'.xlsx';
         $mail->Subject   = 'Weekly Report';
         $mail->Body      = "Please download the excel report attached to this email." ."\n" . "Thanks.". "\n";
         $mail->addAddress($email);
