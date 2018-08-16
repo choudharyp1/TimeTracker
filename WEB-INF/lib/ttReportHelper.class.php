@@ -43,7 +43,7 @@ import('ttReportHelper');
 
 require_once(dirname(__FILE__).'/../../plugins/CustomFields.class.php');
 
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -2372,7 +2372,7 @@ class ttReportHelper {
         $group_name = $val['group_name'];
 
         //SQL Query on the Users table to get all users of the group
-        $sql = "select u.id, u.name, u.login, u.email from tt_users u where u.group_id = $group_id";
+        $sql = "select u.id, u.name, u.login, u.email from tt_users u where u.group_id = $group_id AND u.status = 1;";
         $ures = $mdb2->query($sql);
         if (is_a($ures, 'PEAR_Error')) {
             exit();
@@ -2390,7 +2390,7 @@ class ttReportHelper {
             left join tt_users u on (l.user_id = u.id) 
             left join tt_projects p on (l.project_id = p.id)
             left join tt_tasks t on (l.task_id = t.id) 
-            where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1
+            where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1 AND u.status = 1
             GROUP BY l.user_id, l.project_id, l.date, l.task_id
             ORDER BY l.user_id, l.date";
 
@@ -2428,7 +2428,7 @@ class ttReportHelper {
         $sql = "select SEC_TO_TIME(SUM(TIME_TO_SEC(l.duration))) As total_duration, l.user_id, u.login, l.date ,l.project_id, p.name from tt_log l 
             left join tt_users u on (l.user_id = u.id) 
             left join tt_projects p on (l.project_id = p.id)
-           where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1
+           where l.date <= '$end_week' AND l.date >= '$start_week' AND u.group_id = $group_id  AND WEEKDAY(l.date) < 5 AND l.status = 1 AND u.status = 1
             GROUP BY l.user_id, l.date
             ORDER BY l.user_id";
 

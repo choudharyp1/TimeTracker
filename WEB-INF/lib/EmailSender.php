@@ -7,7 +7,7 @@
  */
 
 
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -37,7 +37,7 @@ class EmailSender
         global $user;
         global $i18n;
 
-        $body = "Please update your hours in the time tracker. Thanks.";
+        $body = "Please update your hours in the time tracker. \n Here is the link: http://timetracker.alert.local/time.php \n  Thanks.";
 
         import('mail.Mailer');
         $mailer = new Mailer();
