@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-24 16:48:45
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:48:34
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\notification_add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:69905b06d0cd0c4bf1-60305143%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '9eb4c5f27a45a7cadb7e746edc9cd5d4867a6f6a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\notification_add.tpl',
-      1 => 1520563152,
+      1 => 1529938434,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ $_smarty_tpl->decodeProperties(array (
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      <table cellspacing="1" cellpadding="2" border="0">
+      <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['fav_report'];?>
  (*):</td>

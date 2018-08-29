@@ -6,8 +6,10 @@
 
       <table cellspacing="0" cellpadding="0" height="30" border="0" width="100%">
         <tr>
-          <td width="100%" align="center" bgcolor="#eeeeee"><a href="#">AlertDriving Anuko TimeTracker</a></td>
+          <td width="100%" align="center" bgcolor="#eeeeee"><a href="#">Anuko TimeTracker, by Pratik Choudhary</a></td>
         </tr>
+
+
       </table>
       <br>
       <table cellspacing="0" cellpadding="4" width="100%" border="0">

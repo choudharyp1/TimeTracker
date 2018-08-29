@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 16:51:26
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 15:59:37
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\admin_groups.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:211985b042e6e8f1aa8-11104266%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '625f538fad847b521791bee9dd2c8001f1ccce5a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\admin_groups.tpl',
-      1 => 1523293120,
+      1 => 1529939063,
       2 => 'file',
     ),
   ),
@@ -28,8 +28,8 @@ if (!is_callable('smarty_modifier_escape')) include 'C:\xampp\htdocs\timetracker
 </td></tr>
 </table>
 
-<table cellspacing="1" cellpadding="3" border="0" width="720">
-  <tr>
+<table  cellspacing="1" cellpadding="3" border="0" width="720">
+  <tr class="table borderless">
     <td width="3%" class="tableHeader"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['id'];?>
 </td>
     <td width="70%" class="tableHeader"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['thing_name'];?>

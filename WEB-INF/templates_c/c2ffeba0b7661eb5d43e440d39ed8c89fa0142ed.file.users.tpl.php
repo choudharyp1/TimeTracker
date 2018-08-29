@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 21:25:40
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:42:28
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\users.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:192595b046eb4379675-03995334%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'c2ffeba0b7661eb5d43e440d39ed8c89fa0142ed' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\users.tpl',
-      1 => 1522037016,
+      1 => 1529940296,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if (!is_callable('smarty_modifier_escape')) include 'C:\xampp\htdocs\timetracker
 </script>
 
 <table cellspacing="0" cellpadding="7" border="0" width="720">
-  <tr>
+  <tr class="table borderless">
     <td valign="top">
 <?php if ($_smarty_tpl->getVariable('user')->value->can('manage_users')){?>
       <table cellspacing="1" cellpadding="3" border="0" width="100%">

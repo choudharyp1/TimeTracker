@@ -17,14 +17,16 @@ class EmailSender
 {
     static function sendFile($filename, $email){
         $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->Host = 'ssl://secure.emailsrvr.com';
+        $mail->IsSMTP();
+        $mail->CharSet="UTF-8";
+        $mail->SMTPSecure = 'tls';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->Username = 'username@gmail.com';
+        $mail->Password = 'enter password';
         $mail->SMTPAuth = true;
-        $mail->Username = 'dev@alertdriving.com';
-        $mail->Password = 'Password$100';
-        $mail->Port = 465;
-        $mail->From = 'dev@alertdriving.com';
-        $mail->FromName  = 'AlertDriving Time tracker';
+        $mail->From = 'no-reply@timetracker.anuko.com';
+        $mail->FromName  = 'Anuko Time tracker';
         $file_to_attach = "/tmp/timetracker/" .$filename.'.xlsx';
         $mail->Subject   = 'Weekly Report';
         $mail->Body      = "Please download the excel report attached to this email." ."\n" . "Thanks.". "\n";

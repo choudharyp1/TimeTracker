@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 17:53:29
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:00:29
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\time.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:309725b043cf9147768-65367621%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'f0ad405aa1bee69b122aeb263e42182443a7988c' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\time.tpl',
-      1 => 1517679596,
+      1 => 1529941484,
       2 => 'file',
     ),
   ),
@@ -30,7 +30,7 @@ if (!is_callable('smarty_function_cycle')) include 'C:\xampp\htdocs\timetracker\
 
 <?php echo $_smarty_tpl->getVariable('forms')->value['timeRecordForm']['open'];?>
 
-<table cellspacing="4" cellpadding="0" border="0">
+<table style="" cellspacing="4" cellpadding="0" border="0">
 <?php if ($_smarty_tpl->getVariable('user')->value->isPluginEnabled('wv')){?>
   <tr>
     <td align="center" colspan=2">
@@ -42,8 +42,8 @@ if (!is_callable('smarty_function_cycle')) include 'C:\xampp\htdocs\timetracker\
     </td>
   </tr>
 <?php }?>
-  <tr>
-    <td valign="top">
+  <tr class="table borderless" >
+    <td valign="top" align="right">
       <table>
 <?php if ($_smarty_tpl->getVariable('on_behalf_control')->value){?>
         <tr>
@@ -120,7 +120,7 @@ if (!is_callable('smarty_function_cycle')) include 'C:\xampp\htdocs\timetracker\
 <?php }?>
       </table>
     </td>
-    <td valign="top">
+    <td valign="top" align="left">
       <table>
         <tr><td><?php echo $_smarty_tpl->getVariable('forms')->value['timeRecordForm']['date']['control'];?>
 </td></tr>
@@ -130,19 +130,19 @@ if (!is_callable('smarty_function_cycle')) include 'C:\xampp\htdocs\timetracker\
 </table>
 
 <table>
-  <tr>
-    <td align="right"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['note'];?>
-:</td>
+  <tr class="table borderless">
+    <td align="right"><b><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['note'];?>
+:  </b></td>
     <td align="left"><?php echo $_smarty_tpl->getVariable('forms')->value['timeRecordForm']['note']['control'];?>
 </td>
   </tr>
-  <tr>
+  <tr class="table borderless">
     <td align="center" colspan="2"><?php echo $_smarty_tpl->getVariable('forms')->value['timeRecordForm']['btn_submit']['control'];?>
 </td>
   </tr>
 </table>
 
-<table width="720">
+<table id="dayview-table" width="720">
 <tr>
   <td valign="top">
 <?php if ($_smarty_tpl->getVariable('time_records')->value){?>
@@ -201,8 +201,8 @@ if ($_smarty_tpl->_count($_from) > 0){
         <td align="right" valign="top"><?php if (($_smarty_tpl->tpl_vars['record']->value['duration']=='0:00'&&$_smarty_tpl->tpl_vars['record']->value['start']!='')){?><font color="#ff0000"><?php echo $_smarty_tpl->getVariable('i18n')->value['form']['time']['uncompleted'];?>
 </font><?php }else{ ?><?php echo $_smarty_tpl->tpl_vars['record']->value['duration'];?>
 <?php }?></td>
-        <td valign="top"><?php if ($_smarty_tpl->tpl_vars['record']->value['comment']){?><?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['record']->value['comment']);?>
-<?php }else{ ?>&nbsp;<?php }?></td>
+        <td valign="top" class="dayview-table-notes"><?php if ($_smarty_tpl->tpl_vars['record']->value['comment']){?><?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['record']->value['comment']);?>
+<?php }else{ ?><?php }?></td>
         <td valign="top" align="center">
     <?php if ($_smarty_tpl->tpl_vars['record']->value['invoice_id']){?>
           &nbsp;

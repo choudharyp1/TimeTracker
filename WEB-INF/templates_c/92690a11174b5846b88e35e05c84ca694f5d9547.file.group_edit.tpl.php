@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-23 19:05:09
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:45:24
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\group_edit.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:326985b059f4553c7f8-03887994%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '92690a11174b5846b88e35e05c84ca694f5d9547' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\group_edit.tpl',
-      1 => 1523503512,
+      1 => 1529938154,
       2 => 'file',
     ),
   ),
@@ -124,7 +124,7 @@ function handlePluginCheckboxes() {
 <table cellspacing="4" cellpadding="7" border="0">
     <tr>
       <td>
-        <table cellspacing="1" cellpadding="2" border="0">
+        <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
 <?php if ($_smarty_tpl->getVariable('user')->value->can('manage_basic_settings')){?>
           <tr>
             <td align="right" nowrap><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['group_name'];?>
@@ -259,10 +259,9 @@ function handlePluginCheckboxes() {
           </tr>
 
           <tr>
-             <td colspan="2" class="sectionHeader"><?php echo $_smarty_tpl->getVariable('i18n')->value['form']['group_edit']['plugins'];?>
+             <td  colspan="2" class="sectionHeader"><?php echo $_smarty_tpl->getVariable('i18n')->value['form']['group_edit']['plugins'];?>
 </td>
           </tr>
-          <tr><td>&nbsp;</td></tr>
           <tr>
             <td align="right" nowrap><?php echo $_smarty_tpl->getVariable('forms')->value['groupForm']['charts']['control'];?>
 </td>

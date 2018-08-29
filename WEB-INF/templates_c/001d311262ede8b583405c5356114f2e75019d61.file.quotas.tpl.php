@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-29 19:14:58
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-11 21:48:58
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\quotas.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:287865b0d8a92e25950-04428233%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '001d311262ede8b583405c5356114f2e75019d61' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\quotas.tpl',
-      1 => 1517192598,
+      1 => 1529676312,
       2 => 'file',
     ),
   ),

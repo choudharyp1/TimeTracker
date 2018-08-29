@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 20:38:19
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:48:06
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\report.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:69725b04639ba4c277-89675886%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '0063b026ae8c26ed178296253da362ede85085fb' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\report.tpl',
-      1 => 1523727166,
+      1 => 1529947119,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ $_smarty_tpl->decodeProperties(array (
 
 <?php echo $_smarty_tpl->getVariable('forms')->value['reportForm']['open'];?>
 
-<table width="720">
+<table class="table borderless" width="720">
   <td valign="top">
     <table border="0" cellpadding="3" cellspacing="1" width="100%">
       <tr>
@@ -167,7 +167,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 </td><?php }?>
     <?php if ($_smarty_tpl->getVariable('bean')->value->getAttribute('chduration')){?><td class="cellRightAligned"><?php echo $_smarty_tpl->tpl_vars['item']->value['duration'];?>
 </td><?php }?>
-    <?php if ($_smarty_tpl->getVariable('bean')->value->getAttribute('chnote')){?><td class="cellLeftAligned"><?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['item']->value['note']);?>
+    <?php if ($_smarty_tpl->getVariable('bean')->value->getAttribute('chnote')){?><td class="cellLeftAligned report-table-notes"><?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['item']->value['note']);?>
 </td><?php }?>
     <?php if ($_smarty_tpl->getVariable('bean')->value->getAttribute('chcost')){?><td class="cellRightAligned"><?php if ($_smarty_tpl->getVariable('user')->value->can('manage_invoices')||$_smarty_tpl->getVariable('user')->value->isClient()){?><?php echo $_smarty_tpl->tpl_vars['item']->value['cost'];?>
 <?php }else{ ?><?php echo $_smarty_tpl->tpl_vars['item']->value['expense'];?>

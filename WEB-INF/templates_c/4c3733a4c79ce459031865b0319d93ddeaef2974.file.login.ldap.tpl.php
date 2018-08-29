@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-23 19:48:57
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 15:56:57
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\login.ldap.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:110785b05a989810b78-72434606%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '4c3733a4c79ce459031865b0319d93ddeaef2974' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\login.ldap.tpl',
-      1 => 1516250162,
+      1 => 1529939258,
       2 => 'file',
     ),
   ),
@@ -17,7 +17,7 @@ $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
-<table border="0">
+<table class="table borderless" border="0">
   <?php if ($_smarty_tpl->getVariable('show_hint')->value){?>
   <tr>
     <td colspan="2" align="center"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['ldap_hint'];?>

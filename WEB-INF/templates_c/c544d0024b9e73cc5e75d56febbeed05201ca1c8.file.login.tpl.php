@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 16:43:27
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 15:56:57
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:81415b042c8f0c2f52-70893859%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'c544d0024b9e73cc5e75d56febbeed05201ca1c8' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\login.tpl',
-      1 => 1516250162,
+      1 => 1529676316,
       2 => 'file',
     ),
   ),
@@ -37,8 +37,3 @@ function get_date() {
     </td>
   </tr>
 </table>
-
-<?php if (!empty($_smarty_tpl->getVariable('about_text',null,true,false)->value)){?>
-  <div id="LoginAboutText"> <?php echo $_smarty_tpl->getVariable('about_text')->value;?>
- </div>
-<?php }?>

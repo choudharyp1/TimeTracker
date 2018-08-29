@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-29 20:13:34
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:46:07
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\week.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:154485b0d984e38b8d1-23782920%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '713c371e91bc699b8e7ed11e4a23870664836e99' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\week.tpl',
-      1 => 1519257322,
+      1 => 1529937227,
       2 => 'file',
     ),
   ),
@@ -55,7 +55,7 @@ function fillDropdowns() {
 </a>
     </td>
   </tr>
-  <tr>
+  <tr class="table borderless">
     <td valign="top">
       <table>
 <?php if ($_smarty_tpl->getVariable('on_behalf_control')->value){?>
@@ -123,7 +123,7 @@ function fillDropdowns() {
     </td>
   </tr>
 </table>
-<table width="720">
+<table id="weekview-form-table" width="100%">
   <tr valign="top">
     <td><?php echo $_smarty_tpl->getVariable('forms')->value['weekTimeForm']['week_durations']['control'];?>
 </td>
@@ -131,7 +131,7 @@ function fillDropdowns() {
 </table>
 
 <table>
-  <tr>
+  <tr class="table borderless">
     <td align="center" colspan="2"><?php echo $_smarty_tpl->getVariable('forms')->value['weekTimeForm']['btn_submit']['control'];?>
 </td>
   </tr>
@@ -139,7 +139,7 @@ function fillDropdowns() {
 </table>
 
 <?php if ($_smarty_tpl->getVariable('user')->value->isPluginEnabled('wvl')){?>
-<table width="720">
+<table id="weekview-table">
 <tr>
   <td valign="top">
 <?php if ($_smarty_tpl->getVariable('time_records')->value){?>
@@ -202,7 +202,7 @@ if ($_smarty_tpl->_count($_from) > 0){
         <td align="right" valign="top"><?php if (($_smarty_tpl->tpl_vars['record']->value['duration']=='0:00'&&$_smarty_tpl->tpl_vars['record']->value['start']!='')){?><font color="#ff0000"><?php echo $_smarty_tpl->getVariable('i18n')->value['form']['time']['uncompleted'];?>
 </font><?php }else{ ?><?php echo $_smarty_tpl->tpl_vars['record']->value['duration'];?>
 <?php }?></td>
-        <td valign="top"><?php if ($_smarty_tpl->tpl_vars['record']->value['comment']){?><?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['record']->value['comment']);?>
+        <td valign="top" class="weekview-table-notes"><?php if ($_smarty_tpl->tpl_vars['record']->value['comment']){?><?php echo smarty_modifier_escape($_smarty_tpl->tpl_vars['record']->value['comment']);?>
 <?php }else{ ?>&nbsp;<?php }?></td>
         <td valign="top" align="center">
     <?php if ($_smarty_tpl->tpl_vars['record']->value['invoice_id']){?>

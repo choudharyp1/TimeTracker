@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 21:25:42
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:42:30
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\user_add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:128885b046eb6260e77-15627342%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'd22087b17cd2bfe4b21bf37ef7a941f93fefc97e' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\user_add.tpl',
-      1 => 1521155818,
+      1 => 1529940242,
       2 => 'file',
     ),
   ),
@@ -76,7 +76,7 @@ function handleClientControl() {
 <?php echo $_smarty_tpl->getVariable('forms')->value['userForm']['open'];?>
 
 <table cellspacing="4" cellpadding="7" border="0">
-  <table cellspacing="1" cellpadding="2" border="0">
+  <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
     <tr>
       <td align="right"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['person_name'];?>
  (*):</td>

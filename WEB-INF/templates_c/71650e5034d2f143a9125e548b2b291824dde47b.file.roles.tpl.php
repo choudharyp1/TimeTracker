@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-23 19:28:07
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-11 21:49:28
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\roles.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18225b05a4a7ddddf7-99553779%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '71650e5034d2f143a9125e548b2b291824dde47b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\roles.tpl',
-      1 => 1519592996,
+      1 => 1529938191,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if (!is_callable('smarty_modifier_escape')) include 'C:\xampp\htdocs\timetracker
 </script>
 
 <table cellspacing="0" cellpadding="7" border="0" width="720">
-  <tr>
+  <tr class="table borderless">
     <td valign="top">
       <table cellspacing="1" cellpadding="3" border="0" width="100%">
   <?php if ($_smarty_tpl->getVariable('inactive_roles')->value){?>

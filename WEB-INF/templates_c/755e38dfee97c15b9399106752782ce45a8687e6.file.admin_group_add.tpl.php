@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 17:52:44
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 15:59:54
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\admin_group_add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:138075b043ccccbd826-38336577%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '755e38dfee97c15b9399106752782ce45a8687e6' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\admin_group_add.tpl',
-      1 => 1522945370,
+      1 => 1529938550,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ $_smarty_tpl->decodeProperties(array (
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      <table cellspacing="1" cellpadding="2" border="0">
+      <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right" nowrap><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['group_name'];?>
 :</td>

@@ -1986,7 +1986,7 @@ class ttReportHelper {
 
         //EXCEL FILE HEADER
         $sheet->mergeCells('A1:L1');
-        $sheet->setCellValue('A1', 'Weekly Alert Driving Time Tracking Report');
+        $sheet->setCellValue('A1', 'Weekly Time Tracking Report');
         $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
         $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
 

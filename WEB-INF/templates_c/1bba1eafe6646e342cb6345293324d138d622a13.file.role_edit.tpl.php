@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-29 18:01:02
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-11 21:49:38
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\role_edit.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:317185b0d793eecb5e0-89466894%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '1bba1eafe6646e342cb6345293324d138d622a13' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\role_edit.tpl',
-      1 => 1519603802,
+      1 => 1529938335,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ $_smarty_tpl->decodeProperties(array (
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      <table cellspacing="1" cellpadding="2" border="0">
+      <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['thing_name'];?>
  (*):</td>

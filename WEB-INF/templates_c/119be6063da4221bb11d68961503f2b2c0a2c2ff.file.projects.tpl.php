@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 20:34:23
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:01:40
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\projects.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:11565b0462af8fffa0-96514510%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '119be6063da4221bb11d68961503f2b2c0a2c2ff' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\projects.tpl',
-      1 => 1522774494,
+      1 => 1529939426,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if (!is_callable('smarty_modifier_escape')) include 'C:\xampp\htdocs\timetracker
 </script>
 
 <table cellspacing="0" cellpadding="7" border="0" width="720">
-  <tr>
+  <tr class="table borderless">
     <td valign="top">
 <?php if ($_smarty_tpl->getVariable('user')->value->can('manage_projects')){?>
       <table cellspacing="1" cellpadding="3" border="0" width="100%">

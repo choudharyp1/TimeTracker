@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 20:38:17
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:45:51
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\reports.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:310235b046399aef9f7-84439399%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     'aad08d528242e56ad674c0239ae1fa564c6c88dd' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\reports.tpl',
-      1 => 1523725556,
+      1 => 1529939684,
       2 => 'file',
     ),
   ),
@@ -217,7 +217,7 @@ function handleCheckboxes() {
   </table>
 </div>
 
-<table cellspacing="4" cellpadding="7" border="0">
+<table class="table borderless" cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td valign="top" colspan="2" align="center">
       <table border="0" cellpadding="3">

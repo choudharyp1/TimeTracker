@@ -53,10 +53,10 @@
                                                                                     height="43" src="{$custom_logo}"
                                                                                     border="0"></a></td>
                                             {else}
-                                                <td height="55" align="center"><a href="http://confluence.alert.local/"
+                                                <td height="55" align="center"><a href=""
                                                                                   target="_blank"><img style="margin-bottom: 10px;"
                                                                 alt="Anuko Time Tracker" width="50%"
-                                                                src="images/alertDriving_logo.png" border="0"></a></td>
+                                                                src="images/timetracker.png" border="0"></a></td>
                                             {/if}
                                         </tr>
                                     </table>

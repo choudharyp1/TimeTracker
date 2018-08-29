@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2018-05-22 20:34:25
+<?php /* Smarty version Smarty-3.0.7, created on 2018-07-10 16:01:41
          compiled from "C:\xampp\htdocs\timetracker/WEB-INF/templates\project_add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:216135b0462b1819532-03274073%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_smarty_tpl->decodeProperties(array (
     '1f306ab03abb0f347e9f0baba4db55c9f8f155ad' => 
     array (
       0 => 'C:\\xampp\\htdocs\\timetracker/WEB-INF/templates\\project_add.tpl',
-      1 => 1516250162,
+      1 => 1529939346,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ $_smarty_tpl->decodeProperties(array (
 <table cellspacing="4" cellpadding="7" border="0">
   <tr>
     <td>
-      <table cellspacing="1" cellpadding="2" border="0">
+      <table class="table borderless" cellspacing="1" cellpadding="2" border="0">
         <tr>
           <td align="right"><?php echo $_smarty_tpl->getVariable('i18n')->value['label']['thing_name'];?>
  (*):</td>
